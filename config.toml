@@ -31,31 +31,22 @@ enableEmoji = true
     name = 'Posts'
     url = '/posts/'
     weight = 20
-  [[menu.main]]
-    pageRef="about"
-    name = 'About'
-    url = '/about/'
-    weight = 30
 
 [params]
   sitename = "Qriva"
   defaultColor = "dark" # set default color mode: dark or light
-  description = "Random stuff"
+  description = "It ain't much, but it's honest work"
 
 [params.author]
   avatar = "avatar.png" # put the file in assets folder; also ensure that image has same height and width
   # Note: image is not rendered if the resource(avatar image) is not found. No error is displayed.
   intro = "Qriva"
-  name = "Qriva logo"
-  description = "Random stuff"
+  name = "Qriva"
+  description = "It ain't much, but it's honest work"
 
 [[params.socialIcons]]
 name = "github"
 url = "https://github.com/Qriva"
-
-[[params.socialIcons]]
-name = "twitter"
-url = "https://twitter.com"
 
 [[params.socialIcons]]
 name = "Rss"
