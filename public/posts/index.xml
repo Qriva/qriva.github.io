@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Qriva</title>
+    <link>https://qriva.github.io/posts/</link>
+    <description>Recent content in Posts on Qriva</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 19 Apr 2023 13:50:48 +0200</lastBuildDate><atom:link href="https://qriva.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>How to Vfx Graph</title>
+      <link>https://qriva.github.io/posts/how-to-vfx-graph/</link>
+      <pubDate>Wed, 19 Apr 2023 13:50:48 +0200</pubDate>
+      
+      <guid>https://qriva.github.io/posts/how-to-vfx-graph/</guid>
+      <description>This page contains set of useful hints, technical details and common use cases for Unity Visual Effect Graph.
+Useful linksE-book: Creating advanced visual effects in Unity Visual Effect Graph Documentation Unity VFX Graph Forum VFX Graph Roadmap SDF Package How to enable experimental blocksSome nodes and features of vfx graph are hidden by default. If you can&amp;rsquo;t find some nodes that should be available in your Unity editor you need to enable them in preferences.</description>
+    </item>
+    
+  </channel>
+</rss>

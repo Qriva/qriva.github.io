@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en-us"><head>
+  <meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title itemprop="name">How to Vfx Graph | Qriva</title>
+<meta property="og:title" content="How to Vfx Graph | Qriva" />
+<meta name="twitter:title" content="How to Vfx Graph | Qriva" />
+<meta itemprop="name" content="How to Vfx Graph | Qriva" />
+<meta name="application-name" content="How to Vfx Graph | Qriva" />
+<meta property="og:site_name" content="Qriva" />
+
+<meta name="description" content="Unity VFX Graph cheatsheet.">
+<meta itemprop="description" content="Unity VFX Graph cheatsheet." />
+<meta property="og:description" content="Unity VFX Graph cheatsheet." />
+<meta name="twitter:description" content="Unity VFX Graph cheatsheet." />
+
+<meta property="og:locale" content="en-us" />
+<meta name="language" content="en-us" />
+
+
+
+  <meta itemprop="image" content="https://qriva.github.io/" />
+  <meta property="og:image" content="https://qriva.github.io/" />
+  <meta name="twitter:image" content="https://qriva.github.io/" />
+  <meta name="twitter:image:src" content="https://qriva.github.io/" />
+
+
+
+
+    
+    
+    
+    
+
+    <meta property="og:type" content="article" />
+    <meta property="og:article:published_time" content=2023-04-19T13:50:48&#43;0200 />
+    <meta property="article:published_time" content=2023-04-19T13:50:48&#43;0200 />
+
+    
+
+    
+
+    <script defer type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "headline": "How to Vfx Graph",
+        "author": {
+        "@type": "Person",
+        "name": ""
+        },
+        "datePublished": "2023-04-19",
+        "description": "Unity VFX Graph cheatsheet.",
+        "wordCount":  1827 ,
+        "mainEntityOfPage": "True",
+        "dateModified": "2023-04-19",
+        "image": {
+        "@type": "imageObject",
+        "url": ""
+        },
+        "publisher": {
+        "@type": "Organization",
+        "name": "Qriva"
+        }
+    }
+    </script>
+
+  <meta name="generator" content="Hugo 0.111.3">
+
+  
+
+  <link rel="canonical" href="https://qriva.github.io/posts/how-to-vfx-graph/"><link href="/sass/main.min.88f6b739d6a03c9d9bd3296c52e48b7d827bf6b115170d992bdc4447f144f4fb.css" rel="stylesheet"><link href="/code-highlight.min.706d31975fec544a864cb7f0d847a73ea55ca1df91bf495fd12a177138d807cf.css" rel="stylesheet">
+
+  
+  
+  <link rel="shortcut icon" href="/images/favicon/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+  
+  
+  
+  
+  <meta name="theme-color" content="#ffffff">
+
+  
+  
+
+  
+    </head><body data-theme = "dark" class="notransition">
+<script src="https://qriva.github.io/js/themeLoader.min.4e9e1a253d543bbfec02e7f2460d9621e719fd739dc8a5256faa91cda6e12e03.js"></script><div class="navbar" role="navigation">
+  <nav class="menu" aria-label="Main Navigation">
+    <a href="/" class="logo">
+      <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" 
+viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" 
+stroke-linejoin="round" class="feather feather-home">
+<title>Home</title>
+<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+<polyline points="9 22 9 12 15 12 15 22"></polyline>
+</svg>
+    </a>
+    <input type="checkbox" id="menu-trigger" class="menu-trigger" />
+    <label for="menu-trigger">
+      <span class="menu-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" stroke="currentColor" fill="none" viewBox="0 0 14 14"><title>Menu</title><path stroke-linecap="round" stroke-linejoin="round" d="M10.595 7L3.40726 7"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 3.51488L3.49301 3.51488"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 10.4851H3.49301"></path><path stroke-linecap="round" stroke-linejoin="round" d="M0.5 12.5V1.5C0.5 0.947715 0.947715 0.5 1.5 0.5H12.5C13.0523 0.5 13.5 0.947715 13.5 1.5V12.5C13.5 13.0523 13.0523 13.5 12.5 13.5H1.5C0.947715 13.5 0.5 13.0523 0.5 12.5Z"></path></svg>
+      </span>
+    </label>
+
+    <div class="trigger">
+      <ul class="trigger-container">
+        
+        
+          <li>
+            <a 
+            class="menu-link "
+            href="/">
+            Home
+            </a>
+            
+          </li>
+        
+          <li>
+            <a 
+            class="menu-link active"
+            href="/posts/">
+            Posts
+            </a>
+            
+          </li>
+        
+        <li class="menu-separator">
+          <span>|</span>
+        </li>
+      </ul>
+      <a id="mode" href="#">
+        <svg xmlns="http://www.w3.org/2000/svg" class="mode-sunny" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>LIGHT</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" class="mode-moon" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>DARK</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+      </a>
+    </div>
+  </nav>
+</div>
+
+<div class="wrapper post">
+    <main class="page-content" aria-label="Content">
+        <article>
+            <header class="header">
+                <h1 class="header-title">How to Vfx Graph</h1>
+                
+                <div class="post-meta">
+                    <time datetime="2023-04-19T13:50:48&#43;02:00" itemprop="datePublished"> Apr 19, 2023 </time>
+                </div>
+            </header>
+            <div class="page-content">
+                <p>This page contains set of useful hints, technical details and common use cases for Unity Visual Effect Graph.</p>
+<h2 id="useful-links">
+    Useful links
+    <a class="heading-anchor" href="#useful-links">
+        <svg fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path clip-rule="evenodd" fill="#4A5568" fill-rule="evenodd" d="M12.5858 4.58579C13.3668 3.80474 14.6331 3.80474 15.4142 4.58579C16.1952 5.36683 16.1952 6.63316 15.4142 7.41421L12.4142 10.4142C11.6331 11.1953 10.3668 11.1953 9.58577 10.4142C9.19524 10.0237 8.56208 10.0237 8.17156 10.4142C7.78103 10.8047 7.78103 11.4379 8.17156 11.8284C9.73365 13.3905 12.2663 13.3905 13.8284 11.8284L16.8284 8.82843C18.3905 7.26633 18.3905 4.73367 16.8284 3.17157C15.2663 1.60948 12.7337 1.60948 11.1716 3.17157L9.67156 4.67157C9.28103 5.0621 9.28103 5.69526 9.67156 6.08579C10.0621 6.47631 10.6952 6.47631 11.0858 6.08579L12.5858 4.58579ZM7.58579 9.58579C8.36683 8.80474 9.63316 8.80474 10.4142 9.58579C10.8047 9.97631 11.4379 9.97631 11.8284 9.58579C12.219 9.19526 12.219 8.5621 11.8284 8.17157C10.2663 6.60948 7.73367 6.60948 6.17157 8.17157L3.17157 11.1716C1.60948 12.7337 1.60948 15.2663 3.17157 16.8284C4.73367 18.3905 7.26633 18.3905 8.82843 16.8284L10.3284 15.3284C10.719 14.9379 10.719 14.3047 10.3284 13.9142C9.9379 13.5237 9.30474 13.5237 8.91421 13.9142L7.41421 15.4142C6.63316 16.1953 5.36684 16.1953 4.58579 15.4142C3.80474 14.6332 3.80474 13.3668 4.58579 12.5858L7.58579 9.58579Z"/></svg>
+    </a>
+</h2><ul>
+<li><a href="https://resources.unity.com/games/definitive-guide-to-creating-visual-effects">E-book: Creating advanced visual effects in Unity</a></li>
+<li><a href="https://docs.unity3d.com/Packages/com.unity.visualeffectgraph@14.0/manual/index.html">Visual Effect Graph Documentation</a></li>
+<li><a href="https://forum.unity.com/forums/visual-effect-graph.428/">Unity VFX Graph Forum</a></li>
+<li><a href="https://portal.productboard.com/unity/1-unity-platform-rendering-visual-effects/tabs/9-vfx-graph">VFX Graph Roadmap</a></li>
+<li><a href="https://github.com/Unity-Technologies/com.unity.demoteam.mesh-to-sdf">SDF Package</a></li>
+</ul>
+<h2 id="how-to-enable-experimental-blocks">
+    How to enable experimental blocks
+    <a class="heading-anchor" href="#how-to-enable-experimental-blocks">
+        <svg fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path clip-rule="evenodd" fill="#4A5568" fill-rule="evenodd" d="M12.5858 4.58579C13.3668 3.80474 14.6331 3.80474 15.4142 4.58579C16.1952 5.36683 16.1952 6.63316 15.4142 7.41421L12.4142 10.4142C11.6331 11.1953 10.3668 11.1953 9.58577 10.4142C9.19524 10.0237 8.56208 10.0237 8.17156 10.4142C7.78103 10.8047 7.78103 11.4379 8.17156 11.8284C9.73365 13.3905 12.2663 13.3905 13.8284 11.8284L16.8284 8.82843C18.3905 7.26633 18.3905 4.73367 16.8284 3.17157C15.2663 1.60948 12.7337 1.60948 11.1716 3.17157L9.67156 4.67157C9.28103 5.0621 9.28103 5.69526 9.67156 6.08579C10.0621 6.47631 10.6952 6.47631 11.0858 6.08579L12.5858 4.58579ZM7.58579 9.58579C8.36683 8.80474 9.63316 8.80474 10.4142 9.58579C10.8047 9.97631 11.4379 9.97631 11.8284 9.58579C12.219 9.19526 12.219 8.5621 11.8284 8.17157C10.2663 6.60948 7.73367 6.60948 6.17157 8.17157L3.17157 11.1716C1.60948 12.7337 1.60948 15.2663 3.17157 16.8284C4.73367 18.3905 7.26633 18.3905 8.82843 16.8284L10.3284 15.3284C10.719 14.9379 10.719 14.3047 10.3284 13.9142C9.9379 13.5237 9.30474 13.5237 8.91421 13.9142L7.41421 15.4142C6.63316 16.1953 5.36684 16.1953 4.58579 15.4142C3.80474 14.6332 3.80474 13.3668 4.58579 12.5858L7.58579 9.58579Z"/></svg>
+    </a>
+</h2><p>Some nodes and features of vfx graph are hidden by default. If you can&rsquo;t find some nodes that should be available in your Unity editor you need to enable them in preferences.<br>
+Navigate to <code>Edit &gt; Preferences &gt; Visual Effects</code> and turn on &ldquo;<em>Experimental Operators/Blocks</em>&rdquo;.</p>
+<figure><img src="experimental-blocks.png"/>
+</figure>
+<h2 id="context-and-block-inspector">
+    Context and block inspector
+    <a class="heading-anchor" href="#context-and-block-inspector">
+        <svg fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path clip-rule="evenodd" fill="#4A5568" fill-rule="evenodd" d="M12.5858 4.58579C13.3668 3.80474 14.6331 3.80474 15.4142 4.58579C16.1952 5.36683 16.1952 6.63316 15.4142 7.41421L12.4142 10.4142C11.6331 11.1953 10.3668 11.1953 9.58577 10.4142C9.19524 10.0237 8.56208 10.0237 8.17156 10.4142C7.78103 10.8047 7.78103 11.4379 8.17156 11.8284C9.73365 13.3905 12.2663 13.3905 13.8284 11.8284L16.8284 8.82843C18.3905 7.26633 18.3905 4.73367 16.8284 3.17157C15.2663 1.60948 12.7337 1.60948 11.1716 3.17157L9.67156 4.67157C9.28103 5.0621 9.28103 5.69526 9.67156 6.08579C10.0621 6.47631 10.6952 6.47631 11.0858 6.08579L12.5858 4.58579ZM7.58579 9.58579C8.36683 8.80474 9.63316 8.80474 10.4142 9.58579C10.8047 9.97631 11.4379 9.97631 11.8284 9.58579C12.219 9.19526 12.219 8.5621 11.8284 8.17157C10.2663 6.60948 7.73367 6.60948 6.17157 8.17157L3.17157 11.1716C1.60948 12.7337 1.60948 15.2663 3.17157 16.8284C4.73367 18.3905 7.26633 18.3905 8.82843 16.8284L10.3284 15.3284C10.719 14.9379 10.719 14.3047 10.3284 13.9142C9.9379 13.5237 9.30474 13.5237 8.91421 13.9142L7.41421 15.4142C6.63316 16.1953 5.36684 16.1953 4.58579 15.4142C3.80474 14.6332 3.80474 13.3668 4.58579 12.5858L7.58579 9.58579Z"/></svg>
+    </a>
+</h2><p>You can access all available properties of context and operator/block nodes by selecteing them in the graph window. You will find them in standard Inspector window.</p>
+<figure><img src="inspector.png"/>
+</figure>
+<h2 id="how-to-pass-particle-data-to-shader">
+    How to pass particle data to shader
+    <a class="heading-anchor" href="#how-to-pass-particle-data-to-shader">
+        <svg fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path clip-rule="evenodd" fill="#4A5568" fill-rule="evenodd" d="M12.5858 4.58579C13.3668 3.80474 14.6331 3.80474 15.4142 4.58579C16.1952 5.36683 16.1952 6.63316 15.4142 7.41421L12.4142 10.4142C11.6331 11.1953 10.3668 11.1953 9.58577 10.4142C9.19524 10.0237 8.56208 10.0237 8.17156 10.4142C7.78103 10.8047 7.78103 11.4379 8.17156 11.8284C9.73365 13.3905 12.2663 13.3905 13.8284 11.8284L16.8284 8.82843C18.3905 7.26633 18.3905 4.73367 16.8284 3.17157C15.2663 1.60948 12.7337 1.60948 11.1716 3.17157L9.67156 4.67157C9.28103 5.0621 9.28103 5.69526 9.67156 6.08579C10.0621 6.47631 10.6952 6.47631 11.0858 6.08579L12.5858 4.58579ZM7.58579 9.58579C8.36683 8.80474 9.63316 8.80474 10.4142 9.58579C10.8047 9.97631 11.4379 9.97631 11.8284 9.58579C12.219 9.19526 12.219 8.5621 11.8284 8.17157C10.2663 6.60948 7.73367 6.60948 6.17157 8.17157L3.17157 11.1716C1.60948 12.7337 1.60948 15.2663 3.17157 16.8284C4.73367 18.3905 7.26633 18.3905 8.82843 16.8284L10.3284 15.3284C10.719 14.9379 10.719 14.3047 10.3284 13.9142C9.9379 13.5237 9.30474 13.5237 8.91421 13.9142L7.41421 15.4142C6.63316 16.1953 5.36684 16.1953 4.58579 15.4142C3.80474 14.6332 3.80474 13.3668 4.58579 12.5858L7.58579 9.58579Z"/></svg>
+    </a>
+</h2><p>You may want want to customize rendering of particles with custom shader that renders particles based on their data.
+To do that, expose the needed shader properties - they will appear in the output context. Then get the particle data with the <code>Get Attribute</code> block (location must be set to <em>current</em>) and connect to exposed property.</p>
+<figure><img src="pass-data-to-shader.png"
+         alt="Particle color and size pased to the shader."/><figcaption>
+            <p>Particle color and size pased to the shader.</p>
+        </figcaption>
+</figure>
+<h2 id="how-to-use-custom-attributes">
+    How to use custom attributes
+    <a class="heading-anchor" href="#how-to-use-custom-attributes">
+        <svg fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path clip-rule="evenodd" fill="#4A5568" fill-rule="evenodd" d="M12.5858 4.58579C13.3668 3.80474 14.6331 3.80474 15.4142 4.58579C16.1952 5.36683 16.1952 6.63316 15.4142 7.41421L12.4142 10.4142C11.6331 11.1953 10.3668 11.1953 9.58577 10.4142C9.19524 10.0237 8.56208 10.0237 8.17156 10.4142C7.78103 10.8047 7.78103 11.4379 8.17156 11.8284C9.73365 13.3905 12.2663 13.3905 13.8284 11.8284L16.8284 8.82843C18.3905 7.26633 18.3905 4.73367 16.8284 3.17157C15.2663 1.60948 12.7337 1.60948 11.1716 3.17157L9.67156 4.67157C9.28103 5.0621 9.28103 5.69526 9.67156 6.08579C10.0621 6.47631 10.6952 6.47631 11.0858 6.08579L12.5858 4.58579ZM7.58579 9.58579C8.36683 8.80474 9.63316 8.80474 10.4142 9.58579C10.8047 9.97631 11.4379 9.97631 11.8284 9.58579C12.219 9.19526 12.219 8.5621 11.8284 8.17157C10.2663 6.60948 7.73367 6.60948 6.17157 8.17157L3.17157 11.1716C1.60948 12.7337 1.60948 15.2663 3.17157 16.8284C4.73367 18.3905 7.26633 18.3905 8.82843 16.8284L10.3284 15.3284C10.719 14.9379 10.719 14.3047 10.3284 13.9142C9.9379 13.5237 9.30474 13.5237 8.91421 13.9142L7.41421 15.4142C6.63316 16.1953 5.36684 16.1953 4.58579 15.4142C3.80474 14.6332 3.80474 13.3668 4.58579 12.5858L7.58579 9.58579Z"/></svg>
+    </a>
+</h2><p>Using nodes <code>Get CustomAttribute</code> and <code>Set CustomAttribute</code> allows to use custom particle attributes.<br>
+You can set name and type of attribute in the <a href="#context-and-block-inspector">inspector</a>.<br>
+It is important to set matching types of attribute in both getter and setter.</p>
+<figure><img src="custom-attribute.png"
+         alt="Custom attribute secondaryColor of type Vector3."/><figcaption>
+            <p>Custom attribute <code>secondaryColor</code> of type Vector3.</p>
+        </figcaption>
+</figure>
+<h2 id="how-to-send-event-with-attributes">
+    How to send event with attributes
+    <a class="heading-anchor" href="#how-to-send-event-with-attributes">
+        <svg fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path clip-rule="evenodd" fill="#4A5568" fill-rule="evenodd" d="M12.5858 4.58579C13.3668 3.80474 14.6331 3.80474 15.4142 4.58579C16.1952 5.36683 16.1952 6.63316 15.4142 7.41421L12.4142 10.4142C11.6331 11.1953 10.3668 11.1953 9.58577 10.4142C9.19524 10.0237 8.56208 10.0237 8.17156 10.4142C7.78103 10.8047 7.78103 11.4379 8.17156 11.8284C9.73365 13.3905 12.2663 13.3905 13.8284 11.8284L16.8284 8.82843C18.3905 7.26633 18.3905 4.73367 16.8284 3.17157C15.2663 1.60948 12.7337 1.60948 11.1716 3.17157L9.67156 4.67157C9.28103 5.0621 9.28103 5.69526 9.67156 6.08579C10.0621 6.47631 10.6952 6.47631 11.0858 6.08579L12.5858 4.58579ZM7.58579 9.58579C8.36683 8.80474 9.63316 8.80474 10.4142 9.58579C10.8047 9.97631 11.4379 9.97631 11.8284 9.58579C12.219 9.19526 12.219 8.5621 11.8284 8.17157C10.2663 6.60948 7.73367 6.60948 6.17157 8.17157L3.17157 11.1716C1.60948 12.7337 1.60948 15.2663 3.17157 16.8284C4.73367 18.3905 7.26633 18.3905 8.82843 16.8284L10.3284 15.3284C10.719 14.9379 10.719 14.3047 10.3284 13.9142C9.9379 13.5237 9.30474 13.5237 8.91421 13.9142L7.41421 15.4142C6.63316 16.1953 5.36684 16.1953 4.58579 15.4142C3.80474 14.6332 3.80474 13.3668 4.58579 12.5858L7.58579 9.58579Z"/></svg>
+    </a>
+</h2><p>You can initialize particles with data sent via event using method <code>SendEvent(eventName, eventAttribute)</code>.
+To pass the data you need to create instance of <code>VFXEventAttribute</code>, fill it with data you want and pass with the event. Following script sends <code>size</code>, <code>velocity</code>, and custom attrribute <code>secondaryColor</code> to visual effect instance.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityEngine</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityEngine.VFX</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">SendEventExample</span> <span class="p">:</span> <span class="n">MonoBehaviour</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="n">VisualEffect</span> <span class="n">vfx</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="n">Color</span> <span class="n">secondaryColor</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="n">Vector3</span> <span class="n">velocity</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="n">VFXEventAttribute</span> <span class="n">eventAttribute</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">void</span> <span class="n">Start</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// Create vfx event attribute object</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// There is no need to recreate this object every frame</span>
+</span></span><span class="line"><span class="cl">        <span class="n">eventAttribute</span> <span class="p">=</span> <span class="n">vfx</span><span class="p">.</span><span class="n">CreateVFXEventAttribute</span><span class="p">();</span> 
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// Call this method to the send event</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">void</span> <span class="n">PlayVFX</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// Set event data</span>
+</span></span><span class="line"><span class="cl">        <span class="n">eventAttribute</span><span class="p">.</span><span class="n">SetFloat</span><span class="p">(</span><span class="s">&#34;size&#34;</span><span class="p">,</span> <span class="n">Random</span><span class="p">.</span><span class="n">Range</span><span class="p">(</span><span class="m">0f</span><span class="p">,</span> <span class="m">1f</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        <span class="n">eventAttribute</span><span class="p">.</span><span class="n">SetVector3</span><span class="p">(</span><span class="s">&#34;velocity&#34;</span><span class="p">,</span> <span class="n">velocity</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// Custom attribute: secondaryColor</span>
+</span></span><span class="line"><span class="cl">        <span class="n">eventAttribute</span><span class="p">.</span><span class="n">SetVector3</span><span class="p">(</span><span class="s">&#34;secondaryColor&#34;</span><span class="p">,</span> <span class="k">new</span> <span class="n">Vector3</span><span class="p">(</span><span class="n">secondaryColor</span><span class="p">.</span><span class="n">r</span><span class="p">,</span> <span class="n">secondaryColor</span><span class="p">.</span><span class="n">g</span><span class="p">,</span> <span class="n">secondaryColor</span><span class="p">.</span><span class="n">b</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="c1">// Data is copied from eventAttribute, so this object can be used again</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vfx</span><span class="p">.</span><span class="n">SendEvent</span><span class="p">(</span><span class="s">&#34;OnPlay&#34;</span><span class="p">,</span> <span class="n">eventAttribute</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>You need to capture the data inside the graph using <strong>Inherit</strong> attribute block. You can inherit event data only inside Initialize context.
+In case of custom attributes there is no dedicated Inherit block, instead use <code>Get CustomAttribute</code> node with location set to &ldquo;source&rdquo;.
+Data inheritance is essentially getting the attribute from source location.</p>
+<figure><img src="event-data.png"/>
+</figure>
+<h2 id="how-to-use-direct-link-feature">
+    How to use Direct Link feature
+    <a class="heading-anchor" href="#how-to-use-direct-link-feature">
+        <svg fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path clip-rule="evenodd" fill="#4A5568" fill-rule="evenodd" d="M12.5858 4.58579C13.3668 3.80474 14.6331 3.80474 15.4142 4.58579C16.1952 5.36683 16.1952 6.63316 15.4142 7.41421L12.4142 10.4142C11.6331 11.1953 10.3668 11.1953 9.58577 10.4142C9.19524 10.0237 8.56208 10.0237 8.17156 10.4142C7.78103 10.8047 7.78103 11.4379 8.17156 11.8284C9.73365 13.3905 12.2663 13.3905 13.8284 11.8284L16.8284 8.82843C18.3905 7.26633 18.3905 4.73367 16.8284 3.17157C15.2663 1.60948 12.7337 1.60948 11.1716 3.17157L9.67156 4.67157C9.28103 5.0621 9.28103 5.69526 9.67156 6.08579C10.0621 6.47631 10.6952 6.47631 11.0858 6.08579L12.5858 4.58579ZM7.58579 9.58579C8.36683 8.80474 9.63316 8.80474 10.4142 9.58579C10.8047 9.97631 11.4379 9.97631 11.8284 9.58579C12.219 9.19526 12.219 8.5621 11.8284 8.17157C10.2663 6.60948 7.73367 6.60948 6.17157 8.17157L3.17157 11.1716C1.60948 12.7337 1.60948 15.2663 3.17157 16.8284C4.73367 18.3905 7.26633 18.3905 8.82843 16.8284L10.3284 15.3284C10.719 14.9379 10.719 14.3047 10.3284 13.9142C9.9379 13.5237 9.30474 13.5237 8.91421 13.9142L7.41421 15.4142C6.63316 16.1953 5.36684 16.1953 4.58579 15.4142C3.80474 14.6332 3.80474 13.3668 4.58579 12.5858L7.58579 9.58579Z"/></svg>
+    </a>
+</h2><p>Calling <code>SendEvent()</code> on systems with spawn context is not cumulative - in case the same event is triggered multiple times per frame (for single instance) it overrides previous one and only the last one counts.
+Direct link gives better control over spawn events and allows to bypass event limitation per frame.
+To use this feature you need to connect Event context directly to Initialize particle context. By default it will spawn single particle, but you can specify number of generated particles in the <a href="#how-to-send-event-with-attributes">script</a> via <code>VFXEventAttribute</code> by setting <code>spawnCount</code> attribute.</p>
+<figure><img src="direct-link.png"/>
+</figure>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="c1">// Important: Use SetFloat to set spawnCount</span>
+</span></span><span class="line"><span class="cl"><span class="n">eventAttribute</span><span class="p">.</span><span class="n">SetFloat</span><span class="p">(</span><span class="s">&#34;spawnCount&#34;</span><span class="p">,</span> <span class="m">2f</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">vfx</span><span class="p">.</span><span class="n">SendEvent</span><span class="p">(</span><span class="s">&#34;OnPlay&#34;</span><span class="p">,</span> <span class="n">eventAttribute</span><span class="p">);</span>
+</span></span></code></pre></div><blockquote>
+<p><em>Additional resources: <a href="https://forum.unity.com/threads/new-feature-direct-link.1137253/">new-feature-direct-link</a></em></p>
+</blockquote>
+<h2 id="how-to-spawn-or-move-particles-along-the-lineshape">
+    How to spawn or move particles along the line/shape
+    <a class="heading-anchor" href="#how-to-spawn-or-move-particles-along-the-lineshape">
+        <svg fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path clip-rule="evenodd" fill="#4A5568" fill-rule="evenodd" d="M12.5858 4.58579C13.3668 3.80474 14.6331 3.80474 15.4142 4.58579C16.1952 5.36683 16.1952 6.63316 15.4142 7.41421L12.4142 10.4142C11.6331 11.1953 10.3668 11.1953 9.58577 10.4142C9.19524 10.0237 8.56208 10.0237 8.17156 10.4142C7.78103 10.8047 7.78103 11.4379 8.17156 11.8284C9.73365 13.3905 12.2663 13.3905 13.8284 11.8284L16.8284 8.82843C18.3905 7.26633 18.3905 4.73367 16.8284 3.17157C15.2663 1.60948 12.7337 1.60948 11.1716 3.17157L9.67156 4.67157C9.28103 5.0621 9.28103 5.69526 9.67156 6.08579C10.0621 6.47631 10.6952 6.47631 11.0858 6.08579L12.5858 4.58579ZM7.58579 9.58579C8.36683 8.80474 9.63316 8.80474 10.4142 9.58579C10.8047 9.97631 11.4379 9.97631 11.8284 9.58579C12.219 9.19526 12.219 8.5621 11.8284 8.17157C10.2663 6.60948 7.73367 6.60948 6.17157 8.17157L3.17157 11.1716C1.60948 12.7337 1.60948 15.2663 3.17157 16.8284C4.73367 18.3905 7.26633 18.3905 8.82843 16.8284L10.3284 15.3284C10.719 14.9379 10.719 14.3047 10.3284 13.9142C9.9379 13.5237 9.30474 13.5237 8.91421 13.9142L7.41421 15.4142C6.63316 16.1953 5.36684 16.1953 4.58579 15.4142C3.80474 14.6332 3.80474 13.3668 4.58579 12.5858L7.58579 9.58579Z"/></svg>
+    </a>
+</h2><p>Below you can find two simple examples of spawning particles on line and moving them along the line.</p>
+<figure><img src="spawn-on-line.png"
+         alt="Particles evenly distributed between two points."/><figcaption>
+            <p>Particles evenly distributed between two points.</p>
+        </figcaption>
+</figure>
+<figure><img src="move-along-line.png"
+         alt="Particles moving along the line."/><figcaption>
+            <p>Particles moving along the line.</p>
+        </figcaption>
+</figure>
+<figure><img src="particles-line.gif"/>
+</figure>
+<p>There are other various useful nodes to spawn particles:</p>
+<ul>
+<li>Line (block)</li>
+<li>Circle (block)</li>
+<li>Sphere (block)</li>
+<li>Torus (block)</li>
+<li>Cone (block)</li>
+<li>Sample Bezier (operator)</li>
+<li>Sequential 3D (block, operator)</li>
+</ul>
+<h2 id="update-context-vs-output-context">
+    Update context vs Output context
+    <a class="heading-anchor" href="#update-context-vs-output-context">
+        <svg fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path clip-rule="evenodd" fill="#4A5568" fill-rule="evenodd" d="M12.5858 4.58579C13.3668 3.80474 14.6331 3.80474 15.4142 4.58579C16.1952 5.36683 16.1952 6.63316 15.4142 7.41421L12.4142 10.4142C11.6331 11.1953 10.3668 11.1953 9.58577 10.4142C9.19524 10.0237 8.56208 10.0237 8.17156 10.4142C7.78103 10.8047 7.78103 11.4379 8.17156 11.8284C9.73365 13.3905 12.2663 13.3905 13.8284 11.8284L16.8284 8.82843C18.3905 7.26633 18.3905 4.73367 16.8284 3.17157C15.2663 1.60948 12.7337 1.60948 11.1716 3.17157L9.67156 4.67157C9.28103 5.0621 9.28103 5.69526 9.67156 6.08579C10.0621 6.47631 10.6952 6.47631 11.0858 6.08579L12.5858 4.58579ZM7.58579 9.58579C8.36683 8.80474 9.63316 8.80474 10.4142 9.58579C10.8047 9.97631 11.4379 9.97631 11.8284 9.58579C12.219 9.19526 12.219 8.5621 11.8284 8.17157C10.2663 6.60948 7.73367 6.60948 6.17157 8.17157L3.17157 11.1716C1.60948 12.7337 1.60948 15.2663 3.17157 16.8284C4.73367 18.3905 7.26633 18.3905 8.82843 16.8284L10.3284 15.3284C10.719 14.9379 10.719 14.3047 10.3284 13.9142C9.9379 13.5237 9.30474 13.5237 8.91421 13.9142L7.41421 15.4142C6.63316 16.1953 5.36684 16.1953 4.58579 15.4142C3.80474 14.6332 3.80474 13.3668 4.58579 12.5858L7.58579 9.58579Z"/></svg>
+    </a>
+</h2><p>These two contexts may look similar, but adding blocks to them can produce completely different results.<br>
+Update context is executed as compute shader and operates directly on particle data, meanwhile Output context is part of vertex shader and any changes to particle data are discarded.
+It means that Output context changes last only until the end of frame, but because modified data is not written back to memory this operation might be cheaper in case of simple particles, but more costful when rendering mesh particles with higher vertex count. Another difference is that Update context can have more than one Output context connected and it might be worth to calculate something once instead of repeating the same operation twice or more. Changing position attribute in the Output Context may mess up particle sorting and particle strip Orientation.<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<h2 id="how-to-sample-graphics-buffer">
+    How to sample graphics buffer
+    <a class="heading-anchor" href="#how-to-sample-graphics-buffer">
+        <svg fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path clip-rule="evenodd" fill="#4A5568" fill-rule="evenodd" d="M12.5858 4.58579C13.3668 3.80474 14.6331 3.80474 15.4142 4.58579C16.1952 5.36683 16.1952 6.63316 15.4142 7.41421L12.4142 10.4142C11.6331 11.1953 10.3668 11.1953 9.58577 10.4142C9.19524 10.0237 8.56208 10.0237 8.17156 10.4142C7.78103 10.8047 7.78103 11.4379 8.17156 11.8284C9.73365 13.3905 12.2663 13.3905 13.8284 11.8284L16.8284 8.82843C18.3905 7.26633 18.3905 4.73367 16.8284 3.17157C15.2663 1.60948 12.7337 1.60948 11.1716 3.17157L9.67156 4.67157C9.28103 5.0621 9.28103 5.69526 9.67156 6.08579C10.0621 6.47631 10.6952 6.47631 11.0858 6.08579L12.5858 4.58579ZM7.58579 9.58579C8.36683 8.80474 9.63316 8.80474 10.4142 9.58579C10.8047 9.97631 11.4379 9.97631 11.8284 9.58579C12.219 9.19526 12.219 8.5621 11.8284 8.17157C10.2663 6.60948 7.73367 6.60948 6.17157 8.17157L3.17157 11.1716C1.60948 12.7337 1.60948 15.2663 3.17157 16.8284C4.73367 18.3905 7.26633 18.3905 8.82843 16.8284L10.3284 15.3284C10.719 14.9379 10.719 14.3047 10.3284 13.9142C9.9379 13.5237 9.30474 13.5237 8.91421 13.9142L7.41421 15.4142C6.63316 16.1953 5.36684 16.1953 4.58579 15.4142C3.80474 14.6332 3.80474 13.3668 4.58579 12.5858L7.58579 9.58579Z"/></svg>
+    </a>
+</h2><p>Graphics buffer is one of the most useful tools, it allows to initialize particles with concrete data or update them in specific way. You must allocate memory before graphics buffer can be used, and after that its not possible to change its size. If you had to change the size you would need to dispose the old buffer and allocate new one, however allocation is not free operation, so you should avoid this when possible.
+Following example script takes the list of points and sends them through graphics buffer to visual effect:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityEngine</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityEngine.VFX</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityEngine.VFX.Utility</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System.Collections.Generic</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">SetGraphicBuffer</span> <span class="p">:</span> <span class="n">MonoBehaviour</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">BufferStride</span> <span class="p">=</span> <span class="m">12</span><span class="p">;</span> <span class="c1">// 12 Bytes for a Vector3 (4,4,4)</span>
+</span></span><span class="line"><span class="cl"><span class="na">
+</span></span></span><span class="line"><span class="cl"><span class="na">    [SerializeField]</span> <span class="k">private</span> <span class="kt">int</span> <span class="n">bufferInitialCapacity</span> <span class="p">=</span> <span class="m">8</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="na">    [SerializeField]</span> <span class="k">private</span> <span class="n">VisualEffect</span> <span class="n">visualEffect</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// Special helper class</span>
+</span></span><span class="line"><span class="cl"><span class="na">    [SerializeField]</span> <span class="k">private</span> <span class="n">ExposedProperty</span> <span class="n">bufferProperty</span> <span class="p">=</span> <span class="s">&#34;SpawnPoints&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="na">    [SerializeField]</span> <span class="k">private</span> <span class="n">ExposedProperty</span> <span class="n">bufferCountProperty</span> <span class="p">=</span> <span class="s">&#34;SpawnPointsCount&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">Vector3</span><span class="p">&gt;</span> <span class="n">spawnPoints</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">Vector3</span><span class="p">&gt;();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="n">GraphicsBuffer</span> <span class="n">graphicsBuffer</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">void</span> <span class="n">Awake</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// Initial allocation of graphics buffer</span>
+</span></span><span class="line"><span class="cl">        <span class="n">EnsureBufferCapacity</span><span class="p">(</span><span class="k">ref</span> <span class="n">graphicsBuffer</span><span class="p">,</span> <span class="n">bufferInitialCapacity</span><span class="p">,</span> <span class="n">BufferStride</span><span class="p">,</span> <span class="n">visualEffect</span><span class="p">,</span> <span class="n">bufferProperty</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">void</span> <span class="n">LateUpdate</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// Set Buffer data, but before that ensure there is enough capacity</span>
+</span></span><span class="line"><span class="cl">        <span class="n">EnsureBufferCapacity</span><span class="p">(</span><span class="k">ref</span> <span class="n">graphicsBuffer</span><span class="p">,</span> <span class="n">spawnPoints</span><span class="p">.</span><span class="n">Count</span><span class="p">,</span> <span class="n">BufferStride</span><span class="p">,</span> <span class="n">visualEffect</span><span class="p">,</span> <span class="n">bufferProperty</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">graphicsBuffer</span><span class="p">.</span><span class="n">SetData</span><span class="p">(</span><span class="n">spawnPoints</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// Update current number of elements</span>
+</span></span><span class="line"><span class="cl">        <span class="n">visualEffect</span><span class="p">.</span><span class="n">SetInt</span><span class="p">(</span><span class="n">bufferCountProperty</span><span class="p">,</span> <span class="n">spawnPoints</span><span class="p">.</span><span class="n">Count</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">void</span> <span class="n">OnDestroy</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ReleaseBuffer</span><span class="p">(</span><span class="k">ref</span> <span class="n">graphicsBuffer</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">void</span> <span class="n">EnsureBufferCapacity</span><span class="p">(</span><span class="k">ref</span> <span class="n">GraphicsBuffer</span> <span class="n">buffer</span><span class="p">,</span> <span class="kt">int</span> <span class="n">capacity</span><span class="p">,</span> <span class="kt">int</span> <span class="n">stride</span><span class="p">,</span> <span class="n">VisualEffect</span> <span class="n">vfx</span><span class="p">,</span> <span class="kt">int</span> <span class="n">vfxBufferProperty</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// Reallocate new buffer only when buffer is null or capacity is not sufficient</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">buffer</span> <span class="p">==</span> <span class="k">null</span> <span class="p">||</span> <span class="n">buffer</span><span class="p">.</span><span class="n">count</span> <span class="p">&lt;</span> <span class="n">capacity</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// Buffer memory must be released</span>
+</span></span><span class="line"><span class="cl">            <span class="n">buffer</span><span class="p">?.</span><span class="n">Release</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// Vfx Graph uses structured buffer</span>
+</span></span><span class="line"><span class="cl">            <span class="n">buffer</span> <span class="p">=</span> <span class="k">new</span> <span class="n">GraphicsBuffer</span><span class="p">(</span><span class="n">GraphicsBuffer</span><span class="p">.</span><span class="n">Target</span><span class="p">.</span><span class="n">Structured</span><span class="p">,</span> <span class="n">capacity</span><span class="p">,</span> <span class="n">stride</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// Update buffer referenece</span>
+</span></span><span class="line"><span class="cl">            <span class="n">vfx</span><span class="p">.</span><span class="n">SetGraphicsBuffer</span><span class="p">(</span><span class="n">vfxBufferProperty</span><span class="p">,</span> <span class="n">buffer</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">void</span> <span class="n">ReleaseBuffer</span><span class="p">(</span><span class="k">ref</span> <span class="n">GraphicsBuffer</span> <span class="n">buffer</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// Buffer memory must be released</span>
+</span></span><span class="line"><span class="cl">        <span class="n">buffer</span><span class="p">?.</span><span class="n">Release</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">buffer</span> <span class="p">=</span> <span class="k">null</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>The important thing is Buffer stride - it&rsquo;s size (in bytes) of one element in the buffer. In this example we pass buffer of Vector3, so we need 12 bytes, 4 for each component.
+Inside the graph you need to select matching type of data used by the buffer. You can do it by clicking the small cog icon in the right top corner of the <code>SampleBuffer</code> node.</p>
+<figure><img src="buffer-type.png"/>
+</figure>
+<p>Following graph samples the buffer using <code>particle id</code> and spawns particles between points provided by buffer. Because we do not shrink the buffer length, we must wrap index by number of current elements <em>(index % count)</em> in case we removed any spawn point.</p>
+<figure><img src="gbuffer.png"/>
+</figure>
+<p>If you want to use custom struct as buffer elements you can mark it with attribute <code>[VFXType(VFXTypeAttribute.Usage.GraphicsBuffer)]</code> and get stride size with <code>System.Runtime.InteropServices.Marshal.SizeOf(typeof(YourStruct));</code> - more information <a href="https://forum.unity.com/threads/unable-to-sample-custom-struct-in-visual-effects-graph.1198300/#post-7661626">here</a>.</p>
+<figure><img src="buffer-points.gif"
+         alt="Adding and removing spawn points"/><figcaption>
+            <p>Adding and removing spawn points</p>
+        </figcaption>
+</figure>
+<h2 id="how-to-rotate-particle-towards-position-or-direction">
+    How to rotate particle towards position or direction
+    <a class="heading-anchor" href="#how-to-rotate-particle-towards-position-or-direction">
+        <svg fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path clip-rule="evenodd" fill="#4A5568" fill-rule="evenodd" d="M12.5858 4.58579C13.3668 3.80474 14.6331 3.80474 15.4142 4.58579C16.1952 5.36683 16.1952 6.63316 15.4142 7.41421L12.4142 10.4142C11.6331 11.1953 10.3668 11.1953 9.58577 10.4142C9.19524 10.0237 8.56208 10.0237 8.17156 10.4142C7.78103 10.8047 7.78103 11.4379 8.17156 11.8284C9.73365 13.3905 12.2663 13.3905 13.8284 11.8284L16.8284 8.82843C18.3905 7.26633 18.3905 4.73367 16.8284 3.17157C15.2663 1.60948 12.7337 1.60948 11.1716 3.17157L9.67156 4.67157C9.28103 5.0621 9.28103 5.69526 9.67156 6.08579C10.0621 6.47631 10.6952 6.47631 11.0858 6.08579L12.5858 4.58579ZM7.58579 9.58579C8.36683 8.80474 9.63316 8.80474 10.4142 9.58579C10.8047 9.97631 11.4379 9.97631 11.8284 9.58579C12.219 9.19526 12.219 8.5621 11.8284 8.17157C10.2663 6.60948 7.73367 6.60948 6.17157 8.17157L3.17157 11.1716C1.60948 12.7337 1.60948 15.2663 3.17157 16.8284C4.73367 18.3905 7.26633 18.3905 8.82843 16.8284L10.3284 15.3284C10.719 14.9379 10.719 14.3047 10.3284 13.9142C9.9379 13.5237 9.30474 13.5237 8.91421 13.9142L7.41421 15.4142C6.63316 16.1953 5.36684 16.1953 4.58579 15.4142C3.80474 14.6332 3.80474 13.3668 4.58579 12.5858L7.58579 9.58579Z"/></svg>
+    </a>
+</h2><p>Generally <code>Orient</code> block is enough to rotate particles towards camera, direction/position or along velocity, however particles will be &lsquo;biased&rsquo; towards camera and sometimes this is not desired behaviour - especially for mesh particles. To fix this you need to specify new axes for rendering, you need two directions: the forward vector and &ldquo;up&rdquo; (or left) direction. The third vector will be calculated with cross product. The following graph rotates particles along velocity, or towards target direction (when result of substraction is connected to the safe normalize instead).</p>
+<figure><img src="rotate-particle.png"/>
+</figure>
+<figure><img src="particles-along-velocity.gif"
+         alt="Along velocity"/><figcaption>
+            <p>Along velocity</p>
+        </figcaption>
+</figure>
+<figure><img src="particles-towards-direction.gif"
+         alt="Towards target position"/><figcaption>
+            <p>Towards target position</p>
+        </figcaption>
+</figure>
+<p>However, there is one problem with the graph above, if direction is collinear to the second (up) vector the cross product will fail to find the axis and we end up with zero - in such a case particles will disappear.<br>
+We need to add safe checks that are present in other orient modes. The source code of <code>Orient: Along Velocity</code> looks like this:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-hlsl" data-lang="hlsl"><span class="line"><span class="cl"><span class="n">axisY</span> <span class="o">=</span> <span class="nb">normalize</span><span class="p">(</span><span class="n">velocity</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">axisZ</span> <span class="o">=</span> <span class="n">position</span> <span class="o">-</span> <span class="n">GetViewVFXPosition</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="n">axisX</span> <span class="o">=</span> <span class="n">VFXSafeNormalizedCross</span><span class="p">(</span><span class="n">axisY</span><span class="p">,</span> <span class="n">axisZ</span><span class="p">,</span> <span class="kt">float3</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mo">0</span><span class="p">,</span><span class="mo">0</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="n">axisZ</span> <span class="o">=</span> <span class="nb">cross</span><span class="p">(</span><span class="n">axisX</span><span class="p">,</span><span class="n">axisY</span><span class="p">);</span>
+</span></span></code></pre></div><p>We need to recreate <code>VFXSafeNormalizedCross()</code> and replace our current <code>cross</code>.<br>
+You can download the subgraph <kbd>
+<a class="download-link" href="/vfx-graphs/SafeNormalizedCross.vfxoperator" download="SafeNormalizedCross.vfxoperator">
+here
+</a>
+</kbd>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-hlsl" data-lang="hlsl"><span class="line"><span class="cl"><span class="kt">float3</span> <span class="n">VFXSafeNormalizedCross</span><span class="p">(</span><span class="kt">float3</span> <span class="n">v1</span><span class="p">,</span> <span class="kt">float3</span> <span class="n">v2</span><span class="p">,</span> <span class="kt">float3</span> <span class="n">fallback</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">float3</span> <span class="n">outVec</span> <span class="o">=</span> <span class="nb">cross</span><span class="p">(</span><span class="n">v1</span><span class="p">,</span> <span class="n">v2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">outVec</span> <span class="o">=</span> <span class="nb">dot</span><span class="p">(</span><span class="n">outVec</span><span class="p">,</span> <span class="n">outVec</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">VFX_EPSILON</span> <span class="o">?</span> <span class="n">fallback</span> <span class="o">:</span> <span class="nb">normalize</span><span class="p">(</span><span class="n">outVec</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">outVec</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><figure><img src="safe-normalized-cross.png"/>
+</figure>
+<blockquote>
+<p><em>Additional resources: <a href="https://forum.unity.com/threads/particles-orient-to-camera-even-though-orient-along-velocity-block-is-used.1427079/#post-8959371">particles-orient-to-camera</a>, <a href="https://forum.unity.com/threads/rotate-particles-towards-direction-from-shape.1352003/#post-8535587">rotate-particles-towards-direction</a></em></p>
+</blockquote>
+<h2 id="how-to-scale-object-and-get-object-transform">
+    How to scale object and get object transform
+    <a class="heading-anchor" href="#how-to-scale-object-and-get-object-transform">
+        <svg fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path clip-rule="evenodd" fill="#4A5568" fill-rule="evenodd" d="M12.5858 4.58579C13.3668 3.80474 14.6331 3.80474 15.4142 4.58579C16.1952 5.36683 16.1952 6.63316 15.4142 7.41421L12.4142 10.4142C11.6331 11.1953 10.3668 11.1953 9.58577 10.4142C9.19524 10.0237 8.56208 10.0237 8.17156 10.4142C7.78103 10.8047 7.78103 11.4379 8.17156 11.8284C9.73365 13.3905 12.2663 13.3905 13.8284 11.8284L16.8284 8.82843C18.3905 7.26633 18.3905 4.73367 16.8284 3.17157C15.2663 1.60948 12.7337 1.60948 11.1716 3.17157L9.67156 4.67157C9.28103 5.0621 9.28103 5.69526 9.67156 6.08579C10.0621 6.47631 10.6952 6.47631 11.0858 6.08579L12.5858 4.58579ZM7.58579 9.58579C8.36683 8.80474 9.63316 8.80474 10.4142 9.58579C10.8047 9.97631 11.4379 9.97631 11.8284 9.58579C12.219 9.19526 12.219 8.5621 11.8284 8.17157C10.2663 6.60948 7.73367 6.60948 6.17157 8.17157L3.17157 11.1716C1.60948 12.7337 1.60948 15.2663 3.17157 16.8284C4.73367 18.3905 7.26633 18.3905 8.82843 16.8284L10.3284 15.3284C10.719 14.9379 10.719 14.3047 10.3284 13.9142C9.9379 13.5237 9.30474 13.5237 8.91421 13.9142L7.41421 15.4142C6.63316 16.1953 5.36684 16.1953 4.58579 15.4142C3.80474 14.6332 3.80474 13.3668 4.58579 12.5858L7.58579 9.58579Z"/></svg>
+    </a>
+</h2><p>When system simulation space is set to <code>World</code> particles ignore parent object scale. If you want particles to be still affected by object scale, you can scale them with LocalToWorld node.
+This node returns matrix that can be used to transform positions, directions and vectors.</p>
+<figure><img src="local-to-world.png"
+         alt="Particles simulated in world space, but initialized with object scale."/><figcaption>
+            <p>Particles simulated in world space, but initialized with object scale.</p>
+        </figcaption>
+</figure>
+<figure><img src="scaling-particles.gif"
+         alt="Changing scale of game object with two systems, first simulated in world space (red) and other local space (blue)."/><figcaption>
+            <p>Changing scale of game object with two systems, first simulated in world space (red) and other local space (blue).</p>
+        </figcaption>
+</figure>
+<blockquote>
+<p><em>Additional resources: <a href="https://forum.unity.com/threads/access-world-scale-of-visual-effects-game-object.925025/#post-8914477">access-world-scale-of-visual-effects-game-object</a></em></p>
+</blockquote>
+<h2 id="how-to-create-custom-spawning-behavior">
+    How to create custom spawning behavior
+    <a class="heading-anchor" href="#how-to-create-custom-spawning-behavior">
+        <svg fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path clip-rule="evenodd" fill="#4A5568" fill-rule="evenodd" d="M12.5858 4.58579C13.3668 3.80474 14.6331 3.80474 15.4142 4.58579C16.1952 5.36683 16.1952 6.63316 15.4142 7.41421L12.4142 10.4142C11.6331 11.1953 10.3668 11.1953 9.58577 10.4142C9.19524 10.0237 8.56208 10.0237 8.17156 10.4142C7.78103 10.8047 7.78103 11.4379 8.17156 11.8284C9.73365 13.3905 12.2663 13.3905 13.8284 11.8284L16.8284 8.82843C18.3905 7.26633 18.3905 4.73367 16.8284 3.17157C15.2663 1.60948 12.7337 1.60948 11.1716 3.17157L9.67156 4.67157C9.28103 5.0621 9.28103 5.69526 9.67156 6.08579C10.0621 6.47631 10.6952 6.47631 11.0858 6.08579L12.5858 4.58579ZM7.58579 9.58579C8.36683 8.80474 9.63316 8.80474 10.4142 9.58579C10.8047 9.97631 11.4379 9.97631 11.8284 9.58579C12.219 9.19526 12.219 8.5621 11.8284 8.17157C10.2663 6.60948 7.73367 6.60948 6.17157 8.17157L3.17157 11.1716C1.60948 12.7337 1.60948 15.2663 3.17157 16.8284C4.73367 18.3905 7.26633 18.3905 8.82843 16.8284L10.3284 15.3284C10.719 14.9379 10.719 14.3047 10.3284 13.9142C9.9379 13.5237 9.30474 13.5237 8.91421 13.9142L7.41421 15.4142C6.63316 16.1953 5.36684 16.1953 4.58579 15.4142C3.80474 14.6332 3.80474 13.3668 4.58579 12.5858L7.58579 9.58579Z"/></svg>
+    </a>
+</h2><p>It is possible to create custom spawn system without using any C# scripts with use of <code>Spawn State</code> node. You can find example of custom <em>spawn over distance</em> in the following forum thread:<br>
+<a href="https://forum.unity.com/threads/spawn-over-distance-is-causing-gc-spikes.1104196/#post-8442167">https://forum.unity.com/threads/spawn-over-distance-is-causing-gc-spikes.1104196/#post-8442167</a></p>
+<h2 id="how-to-spawn-spawn-over-distance-with-interpolation-oldposition">
+    How to spawn spawn over distance with interpolation (oldPosition)
+    <a class="heading-anchor" href="#how-to-spawn-spawn-over-distance-with-interpolation-oldposition">
+        <svg fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path clip-rule="evenodd" fill="#4A5568" fill-rule="evenodd" d="M12.5858 4.58579C13.3668 3.80474 14.6331 3.80474 15.4142 4.58579C16.1952 5.36683 16.1952 6.63316 15.4142 7.41421L12.4142 10.4142C11.6331 11.1953 10.3668 11.1953 9.58577 10.4142C9.19524 10.0237 8.56208 10.0237 8.17156 10.4142C7.78103 10.8047 7.78103 11.4379 8.17156 11.8284C9.73365 13.3905 12.2663 13.3905 13.8284 11.8284L16.8284 8.82843C18.3905 7.26633 18.3905 4.73367 16.8284 3.17157C15.2663 1.60948 12.7337 1.60948 11.1716 3.17157L9.67156 4.67157C9.28103 5.0621 9.28103 5.69526 9.67156 6.08579C10.0621 6.47631 10.6952 6.47631 11.0858 6.08579L12.5858 4.58579ZM7.58579 9.58579C8.36683 8.80474 9.63316 8.80474 10.4142 9.58579C10.8047 9.97631 11.4379 9.97631 11.8284 9.58579C12.219 9.19526 12.219 8.5621 11.8284 8.17157C10.2663 6.60948 7.73367 6.60948 6.17157 8.17157L3.17157 11.1716C1.60948 12.7337 1.60948 15.2663 3.17157 16.8284C4.73367 18.3905 7.26633 18.3905 8.82843 16.8284L10.3284 15.3284C10.719 14.9379 10.719 14.3047 10.3284 13.9142C9.9379 13.5237 9.30474 13.5237 8.91421 13.9142L7.41421 15.4142C6.63316 16.1953 5.36684 16.1953 4.58579 15.4142C3.80474 14.6332 3.80474 13.3668 4.58579 12.5858L7.58579 9.58579Z"/></svg>
+    </a>
+</h2><p>When particles are spawned over distance they are generated every tick of system, in result particles spawn in groups and create empty gaps.You can enable &ldquo;Clamp To One&rdquo; option to spawn max one particle in one place, however this does not fix the problem with gaps.</p>
+<figure><img src="spawn-over-distance-default.png"/>
+</figure>
+<figure><img src="spawn-over-distance-bad.gif"
+         alt="Default behaviour"/><figcaption>
+            <p>Default behaviour</p>
+        </figcaption>
+</figure>
+<p>To fix this you can use <code>oldPosition</code> to interpolate spawned particles in better way. If you use source old and new position you can distribute them evenly like in the graph below or use <code>Random Number</code> to randomize them between these positions.</p>
+<figure><img src="spawn-over-distance-improved.png"/>
+</figure>
+<figure><img src="spawn-over-distance-good.gif"
+         alt="Improved behaviour"/><figcaption>
+            <p>Improved behaviour</p>
+        </figcaption>
+</figure>
+<h2 id="how-to-use-oldposition-and-set-it-in-source-location">
+    How to use oldPosition and set it in source location
+    <a class="heading-anchor" href="#how-to-use-oldposition-and-set-it-in-source-location">
+        <svg fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path clip-rule="evenodd" fill="#4A5568" fill-rule="evenodd" d="M12.5858 4.58579C13.3668 3.80474 14.6331 3.80474 15.4142 4.58579C16.1952 5.36683 16.1952 6.63316 15.4142 7.41421L12.4142 10.4142C11.6331 11.1953 10.3668 11.1953 9.58577 10.4142C9.19524 10.0237 8.56208 10.0237 8.17156 10.4142C7.78103 10.8047 7.78103 11.4379 8.17156 11.8284C9.73365 13.3905 12.2663 13.3905 13.8284 11.8284L16.8284 8.82843C18.3905 7.26633 18.3905 4.73367 16.8284 3.17157C15.2663 1.60948 12.7337 1.60948 11.1716 3.17157L9.67156 4.67157C9.28103 5.0621 9.28103 5.69526 9.67156 6.08579C10.0621 6.47631 10.6952 6.47631 11.0858 6.08579L12.5858 4.58579ZM7.58579 9.58579C8.36683 8.80474 9.63316 8.80474 10.4142 9.58579C10.8047 9.97631 11.4379 9.97631 11.8284 9.58579C12.219 9.19526 12.219 8.5621 11.8284 8.17157C10.2663 6.60948 7.73367 6.60948 6.17157 8.17157L3.17157 11.1716C1.60948 12.7337 1.60948 15.2663 3.17157 16.8284C4.73367 18.3905 7.26633 18.3905 8.82843 16.8284L10.3284 15.3284C10.719 14.9379 10.719 14.3047 10.3284 13.9142C9.9379 13.5237 9.30474 13.5237 8.91421 13.9142L7.41421 15.4142C6.63316 16.1953 5.36684 16.1953 4.58579 15.4142C3.80474 14.6332 3.80474 13.3668 4.58579 12.5858L7.58579 9.58579Z"/></svg>
+    </a>
+</h2><p>By default the <code>oldPosition</code> attribute is not set, the only exception is <code>SpawnOverDistance</code>. If you want to be able to access last position in main system or in particles spawned with GPU event you must set it manually. You can do it inside the graph inside the spawn context, or via the <a href="#how-to-send-event-with-attributes">script</a>.</p>
+<figure><img src="set-old-position.png"/>
+</figure>
+<blockquote>
+<p><em>Additional resources: <a href="https://forum.unity.com/threads/smooth-emit-over-time-distance-using-velocity-only.1425237/#post-8958846">smooth-emit-over-time-distance-using-velocity-only</a></em></p>
+</blockquote>
+<h2 id="mesh-sampling-and-point-cache">
+    Mesh sampling and point cache
+    <a class="heading-anchor" href="#mesh-sampling-and-point-cache">
+        <svg fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path clip-rule="evenodd" fill="#4A5568" fill-rule="evenodd" d="M12.5858 4.58579C13.3668 3.80474 14.6331 3.80474 15.4142 4.58579C16.1952 5.36683 16.1952 6.63316 15.4142 7.41421L12.4142 10.4142C11.6331 11.1953 10.3668 11.1953 9.58577 10.4142C9.19524 10.0237 8.56208 10.0237 8.17156 10.4142C7.78103 10.8047 7.78103 11.4379 8.17156 11.8284C9.73365 13.3905 12.2663 13.3905 13.8284 11.8284L16.8284 8.82843C18.3905 7.26633 18.3905 4.73367 16.8284 3.17157C15.2663 1.60948 12.7337 1.60948 11.1716 3.17157L9.67156 4.67157C9.28103 5.0621 9.28103 5.69526 9.67156 6.08579C10.0621 6.47631 10.6952 6.47631 11.0858 6.08579L12.5858 4.58579ZM7.58579 9.58579C8.36683 8.80474 9.63316 8.80474 10.4142 9.58579C10.8047 9.97631 11.4379 9.97631 11.8284 9.58579C12.219 9.19526 12.219 8.5621 11.8284 8.17157C10.2663 6.60948 7.73367 6.60948 6.17157 8.17157L3.17157 11.1716C1.60948 12.7337 1.60948 15.2663 3.17157 16.8284C4.73367 18.3905 7.26633 18.3905 8.82843 16.8284L10.3284 15.3284C10.719 14.9379 10.719 14.3047 10.3284 13.9142C9.9379 13.5237 9.30474 13.5237 8.91421 13.9142L7.41421 15.4142C6.63316 16.1953 5.36684 16.1953 4.58579 15.4142C3.80474 14.6332 3.80474 13.3668 4.58579 12.5858L7.58579 9.58579Z"/></svg>
+    </a>
+</h2><p>You can read great post about mesh sampling here:
+<a href="https://forum.unity.com/threads/uniform-distribution-with-skinned-mesh-sampling.1188571">https://forum.unity.com/threads/uniform-distribution-with-skinned-mesh-sampling.1188571</a></p>
+<h2 id="how-to-use-particle-decals">
+    How to use particle decals
+    <a class="heading-anchor" href="#how-to-use-particle-decals">
+        <svg fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path clip-rule="evenodd" fill="#4A5568" fill-rule="evenodd" d="M12.5858 4.58579C13.3668 3.80474 14.6331 3.80474 15.4142 4.58579C16.1952 5.36683 16.1952 6.63316 15.4142 7.41421L12.4142 10.4142C11.6331 11.1953 10.3668 11.1953 9.58577 10.4142C9.19524 10.0237 8.56208 10.0237 8.17156 10.4142C7.78103 10.8047 7.78103 11.4379 8.17156 11.8284C9.73365 13.3905 12.2663 13.3905 13.8284 11.8284L16.8284 8.82843C18.3905 7.26633 18.3905 4.73367 16.8284 3.17157C15.2663 1.60948 12.7337 1.60948 11.1716 3.17157L9.67156 4.67157C9.28103 5.0621 9.28103 5.69526 9.67156 6.08579C10.0621 6.47631 10.6952 6.47631 11.0858 6.08579L12.5858 4.58579ZM7.58579 9.58579C8.36683 8.80474 9.63316 8.80474 10.4142 9.58579C10.8047 9.97631 11.4379 9.97631 11.8284 9.58579C12.219 9.19526 12.219 8.5621 11.8284 8.17157C10.2663 6.60948 7.73367 6.60948 6.17157 8.17157L3.17157 11.1716C1.60948 12.7337 1.60948 15.2663 3.17157 16.8284C4.73367 18.3905 7.26633 18.3905 8.82843 16.8284L10.3284 15.3284C10.719 14.9379 10.719 14.3047 10.3284 13.9142C9.9379 13.5237 9.30474 13.5237 8.91421 13.9142L7.41421 15.4142C6.63316 16.1953 5.36684 16.1953 4.58579 15.4142C3.80474 14.6332 3.80474 13.3668 4.58579 12.5858L7.58579 9.58579Z"/></svg>
+    </a>
+</h2><p>Output Particle Decal context is used to spawn decal particles. Important detail is that particle size and particle scale defines the decal box used to cast decals.
+For example if you want to spawn decal on the ground you can orient particles with <code>Orient: Fixed Axis</code> with Z as up. Now the depth/height of the box is controlled by Z component of particle scale.</p>
+<figure><img src="decals.gif"/>
+</figure>
+<p>Currently URP VFX decals do not support layers.</p>
+<h2 id="how-to-kill-particle-via-blackboard-event">
+    How to kill particle via blackboard “event”
+    <a class="heading-anchor" href="#how-to-kill-particle-via-blackboard-event">
+        <svg fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path clip-rule="evenodd" fill="#4A5568" fill-rule="evenodd" d="M12.5858 4.58579C13.3668 3.80474 14.6331 3.80474 15.4142 4.58579C16.1952 5.36683 16.1952 6.63316 15.4142 7.41421L12.4142 10.4142C11.6331 11.1953 10.3668 11.1953 9.58577 10.4142C9.19524 10.0237 8.56208 10.0237 8.17156 10.4142C7.78103 10.8047 7.78103 11.4379 8.17156 11.8284C9.73365 13.3905 12.2663 13.3905 13.8284 11.8284L16.8284 8.82843C18.3905 7.26633 18.3905 4.73367 16.8284 3.17157C15.2663 1.60948 12.7337 1.60948 11.1716 3.17157L9.67156 4.67157C9.28103 5.0621 9.28103 5.69526 9.67156 6.08579C10.0621 6.47631 10.6952 6.47631 11.0858 6.08579L12.5858 4.58579ZM7.58579 9.58579C8.36683 8.80474 9.63316 8.80474 10.4142 9.58579C10.8047 9.97631 11.4379 9.97631 11.8284 9.58579C12.219 9.19526 12.219 8.5621 11.8284 8.17157C10.2663 6.60948 7.73367 6.60948 6.17157 8.17157L3.17157 11.1716C1.60948 12.7337 1.60948 15.2663 3.17157 16.8284C4.73367 18.3905 7.26633 18.3905 8.82843 16.8284L10.3284 15.3284C10.719 14.9379 10.719 14.3047 10.3284 13.9142C9.9379 13.5237 9.30474 13.5237 8.91421 13.9142L7.41421 15.4142C6.63316 16.1953 5.36684 16.1953 4.58579 15.4142C3.80474 14.6332 3.80474 13.3668 4.58579 12.5858L7.58579 9.58579Z"/></svg>
+    </a>
+</h2><p>// TODO</p>
+<h2 id="how-to-use-gpu-events">
+    How to use GPU events
+    <a class="heading-anchor" href="#how-to-use-gpu-events">
+        <svg fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path clip-rule="evenodd" fill="#4A5568" fill-rule="evenodd" d="M12.5858 4.58579C13.3668 3.80474 14.6331 3.80474 15.4142 4.58579C16.1952 5.36683 16.1952 6.63316 15.4142 7.41421L12.4142 10.4142C11.6331 11.1953 10.3668 11.1953 9.58577 10.4142C9.19524 10.0237 8.56208 10.0237 8.17156 10.4142C7.78103 10.8047 7.78103 11.4379 8.17156 11.8284C9.73365 13.3905 12.2663 13.3905 13.8284 11.8284L16.8284 8.82843C18.3905 7.26633 18.3905 4.73367 16.8284 3.17157C15.2663 1.60948 12.7337 1.60948 11.1716 3.17157L9.67156 4.67157C9.28103 5.0621 9.28103 5.69526 9.67156 6.08579C10.0621 6.47631 10.6952 6.47631 11.0858 6.08579L12.5858 4.58579ZM7.58579 9.58579C8.36683 8.80474 9.63316 8.80474 10.4142 9.58579C10.8047 9.97631 11.4379 9.97631 11.8284 9.58579C12.219 9.19526 12.219 8.5621 11.8284 8.17157C10.2663 6.60948 7.73367 6.60948 6.17157 8.17157L3.17157 11.1716C1.60948 12.7337 1.60948 15.2663 3.17157 16.8284C4.73367 18.3905 7.26633 18.3905 8.82843 16.8284L10.3284 15.3284C10.719 14.9379 10.719 14.3047 10.3284 13.9142C9.9379 13.5237 9.30474 13.5237 8.91421 13.9142L7.41421 15.4142C6.63316 16.1953 5.36684 16.1953 4.58579 15.4142C3.80474 14.6332 3.80474 13.3668 4.58579 12.5858L7.58579 9.58579Z"/></svg>
+    </a>
+</h2><p>// TODO</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p><a href="https://forum.unity.com/threads/vfx-graph-set-color-over-life.1353839/#post-8545457">Unity forum - Update vs Output</a>&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+
+            </div>
+        </article>
+    </main>
+</div>
+<footer class="footer">
+    <span class="footer_item"> </span>
+    &nbsp;
+
+    <div class="footer_social-icons">
+<a href="https://github.com/Qriva" target="_blank" rel="noopener noreferrer me" title="Github">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path
+        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+    </path>
+</svg>
+</a>
+<a href="index.xml" target="_blank" rel="noopener noreferrer me" title="Rss">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 11a9 9 0 0 1 9 9" />
+    <path d="M4 4a16 16 0 0 1 16 16" />
+    <circle cx="5" cy="19" r="1" />
+</svg>
+</a></div>
+    <small class="footer_copyright">
+        © 2023 Qriva.
+        Powered by <a href="https://github.com/hugo-sid/hugo-blog-awesome" target="_blank" rel="noreferrer noopener">Hugo blog awesome</a>
+        theme on
+        <a href="https://gohugo.io" target="_blank" rel="noreferrer noopener">Hugo</a>.
+    </small>
+</footer>
+<script src="https://qriva.github.io/js/themeSwitchnMenu.min.2a402288242b6930b175a0722c267e2353055739b3975834df35e56d00dd8f50.js"></script></body>
+</html>
