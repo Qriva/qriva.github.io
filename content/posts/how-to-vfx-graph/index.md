@@ -2,12 +2,15 @@
 title: "How to Vfx Graph"
 date: 2023-04-19T13:50:48+02:00
 description: "Unity VFX Graph cheatsheet."
-draft: true
 ---
 
-Introduction:\
-Technical details and common
-https://docs.unity3d.com/Packages/com.unity.visualeffectgraph@14.0/manual/index.html
+This page contains set of useful hints, technical details and common use cases for Unity Visual Effect Graph.
+## Useful links
+- [E-book: Creating advanced visual effects in Unity](https://resources.unity.com/games/definitive-guide-to-creating-visual-effects)
+- [Visual Effect Graph Documentation](https://docs.unity3d.com/Packages/com.unity.visualeffectgraph@14.0/manual/index.html)
+- [Unity VFX Graph Forum](https://forum.unity.com/forums/visual-effect-graph.428/)
+- [VFX Graph Roadmap](https://portal.productboard.com/unity/1-unity-platform-rendering-visual-effects/tabs/9-vfx-graph)
+- [SDF Package](https://github.com/Unity-Technologies/com.unity.demoteam.mesh-to-sdf)
 
 ## How to enable experimental blocks
 Some nodes and features of vfx graph are hidden by default. If you can't find some nodes that should be available in your Unity editor you need to enable them in preferences.\
@@ -84,7 +87,7 @@ eventAttribute.SetFloat("spawnCount", 2f);
 vfx.SendEvent("OnPlay", eventAttribute);
 ```
 
-> *Additional resources: https://forum.unity.com/threads/new-feature-direct-link.1137253/*
+> *Additional resources: [new-feature-direct-link](https://forum.unity.com/threads/new-feature-direct-link.1137253/)*
 
 ## How to spawn or move particles along the line/shape
 Below you can find two simple examples of spawning particles on line and moving them along the line.
@@ -185,28 +188,79 @@ If you want to use custom struct as buffer elements you can mark it with attribu
 {{% figure src="buffer-points.gif" caption="Adding and removing spawn points" %}}
 
 ## How to rotate particle towards position or direction
-Generally `Orient` block is enough to rotate particles towards camera, direction, position or along velocity, however particles will be 'biased' towards camera and sometimes this is not desired behaviour - especially for mesh particles. To fix this you need to specify new axes for rendering, you need two directions: the forward vector and "up" (or left) direction. The third vector can be calculated with cross product. The following graph rotates particles along velocity, or towards target direction (when result of substraction is connected to the safe normalize instead).
+Generally `Orient` block is enough to rotate particles towards camera, direction/position or along velocity, however particles will be 'biased' towards camera and sometimes this is not desired behaviour - especially for mesh particles. To fix this you need to specify new axes for rendering, you need two directions: the forward vector and "up" (or left) direction. The third vector will be calculated with cross product. The following graph rotates particles along velocity, or towards target direction (when result of substraction is connected to the safe normalize instead).
 
 {{% figure src="rotate-particle.png" %}}
 
 {{% figure src="particles-along-velocity.gif" caption="Along velocity" %}}
 {{% figure src="particles-towards-direction.gif" caption="Towards target position" %}}
 
-https://forum.unity.com/threads/rotate-particles-towards-direction-from-shape.1352003/
+However, there is one problem with the graph above, if direction is collinear to the second (up) vector the cross product will fail to find the axis and we end up with zero - in such a case particles will disappear.\
+We need to add safe checks that are present in other orient modes. The source code of `Orient: Along Velocity` looks like this:
+```hlsl
+axisY = normalize(velocity);
+axisZ = position - GetViewVFXPosition();
+axisX = VFXSafeNormalizedCross(axisY, axisZ, float3(1,0,0));
+axisZ = cross(axisX,axisY);
+```
+We need to recreate `VFXSafeNormalizedCross()` and replace our current `cross`.\
+You can download the subgraph {{% download href="/vfx-graphs/SafeNormalizedCross.vfxoperator" text="here" name="SafeNormalizedCross.vfxoperator" %}}.
 
-## How to spawn rotated particle mesh
+```hlsl
+float3 VFXSafeNormalizedCross(float3 v1, float3 v2, float3 fallback)
+{
+    float3 outVec = cross(v1, v2);
+    outVec = dot(outVec, outVec) < VFX_EPSILON ? fallback : normalize(outVec);
+    return outVec;
+}
+```
 
+{{% figure src="safe-normalized-cross.png" %}}
 
+> *Additional resources: [particles-orient-to-camera](https://forum.unity.com/threads/particles-orient-to-camera-even-though-orient-along-velocity-block-is-used.1427079/#post-8959371), [rotate-particles-towards-direction](https://forum.unity.com/threads/rotate-particles-towards-direction-from-shape.1352003/#post-8535587)*
 
 ## How to scale object and get object transform
-https://forum.unity.com/threads/access-world-scale-of-visual-effects-game-object.925025/#post-8914477
-## How to custom spawning behavior
-## How to use oldPosition and set it in source location
+When system simulation space is set to `World` particles ignore parent object scale. If you want particles to be still affected by object scale, you can scale them with LocalToWorld node.
+This node returns matrix that can be used to transform positions, directions and vectors.
+
+{{% figure src="local-to-world.png" caption="Particles simulated in world space, but initialized with object scale." %}}
+
+{{% figure src="scaling-particles.gif" caption="Changing scale of game object with two systems, first simulated in world space (red) and other local space (blue)." %}}
+
+> *Additional resources: [access-world-scale-of-visual-effects-game-object](https://forum.unity.com/threads/access-world-scale-of-visual-effects-game-object.925025/#post-8914477)*
+
+## How to create custom spawning behavior
+It is possible to create custom spawn system without using any C# scripts with use of `Spawn State` node. You can find example of custom *spawn over distance* in the following forum thread:\
+https://forum.unity.com/threads/spawn-over-distance-is-causing-gc-spikes.1104196/#post-8442167
+
 ## How to spawn spawn over distance with interpolation (oldPosition)
-## How to use GPU events
-https://forum.unity.com/threads/spawn-over-distance-is-causing-gc-spikes.1104196/
-## How to kill particle via “event”
-## How to use particle decals
+When particles are spawned over distance they are generated every tick of system, in result particles spawn in groups and create empty gaps.You can enable "Clamp To One" option to spawn max one particle in one place, however this does not fix the problem with gaps.
+{{% figure src="spawn-over-distance-default.png" %}}
+{{% figure src="spawn-over-distance-bad.gif" caption="Default behaviour" %}}
+To fix this you can use `oldPosition` to interpolate spawned particles in better way. If you use source old and new position you can distribute them evenly like in the graph below or use `Random Number` to randomize them between these positions.
+{{% figure src="spawn-over-distance-improved.png" %}}
+{{% figure src="spawn-over-distance-good.gif" caption="Improved behaviour" %}}
+
+## How to use oldPosition and set it in source location
+By default the `oldPosition` attribute is not set, the only exception is `SpawnOverDistance`. If you want to be able to access last position in main system or in particles spawned with GPU event you must set it manually. You can do it inside the graph inside the spawn context, or via the [script](#how-to-send-event-with-attributes).
+
+{{% figure src="set-old-position.png" %}}
+
+> *Additional resources: [smooth-emit-over-time-distance-using-velocity-only](https://forum.unity.com/threads/smooth-emit-over-time-distance-using-velocity-only.1425237/#post-8958846)*
+
 ## Mesh sampling and point cache
+You can read great post about mesh sampling here:
 https://forum.unity.com/threads/uniform-distribution-with-skinned-mesh-sampling.1188571
 
+## How to use particle decals
+Output Particle Decal context is used to spawn decal particles. Important detail is that particle size and particle scale defines the decal box used to cast decals.
+For example if you want to spawn decal on the ground you can orient particles with `Orient: Fixed Axis` with Z as up. Now the depth/height of the box is controlled by Z component of particle scale.
+
+{{% figure src="decals.gif" %}}
+
+Currently URP VFX decals do not support layers.
+
+## How to kill particle via blackboard “event”
+// TODO
+## How to use GPU events
+// TODO
