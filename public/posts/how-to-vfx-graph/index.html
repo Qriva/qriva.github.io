@@ -53,7 +53,7 @@
         },
         "datePublished": "2023-04-19",
         "description": "Unity VFX Graph cheatsheet.",
-        "wordCount":  1827 ,
+        "wordCount":  2263 ,
         "mainEntityOfPage": "True",
         "dateModified": "2023-04-19",
         "image": {
@@ -190,8 +190,8 @@ Navigate to <code>Edit &gt; Preferences &gt; Visual Effects</code> and turn on &
     <a class="heading-anchor" href="#how-to-pass-particle-data-to-shader">
         <svg fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path clip-rule="evenodd" fill="#4A5568" fill-rule="evenodd" d="M12.5858 4.58579C13.3668 3.80474 14.6331 3.80474 15.4142 4.58579C16.1952 5.36683 16.1952 6.63316 15.4142 7.41421L12.4142 10.4142C11.6331 11.1953 10.3668 11.1953 9.58577 10.4142C9.19524 10.0237 8.56208 10.0237 8.17156 10.4142C7.78103 10.8047 7.78103 11.4379 8.17156 11.8284C9.73365 13.3905 12.2663 13.3905 13.8284 11.8284L16.8284 8.82843C18.3905 7.26633 18.3905 4.73367 16.8284 3.17157C15.2663 1.60948 12.7337 1.60948 11.1716 3.17157L9.67156 4.67157C9.28103 5.0621 9.28103 5.69526 9.67156 6.08579C10.0621 6.47631 10.6952 6.47631 11.0858 6.08579L12.5858 4.58579ZM7.58579 9.58579C8.36683 8.80474 9.63316 8.80474 10.4142 9.58579C10.8047 9.97631 11.4379 9.97631 11.8284 9.58579C12.219 9.19526 12.219 8.5621 11.8284 8.17157C10.2663 6.60948 7.73367 6.60948 6.17157 8.17157L3.17157 11.1716C1.60948 12.7337 1.60948 15.2663 3.17157 16.8284C4.73367 18.3905 7.26633 18.3905 8.82843 16.8284L10.3284 15.3284C10.719 14.9379 10.719 14.3047 10.3284 13.9142C9.9379 13.5237 9.30474 13.5237 8.91421 13.9142L7.41421 15.4142C6.63316 16.1953 5.36684 16.1953 4.58579 15.4142C3.80474 14.6332 3.80474 13.3668 4.58579 12.5858L7.58579 9.58579Z"/></svg>
     </a>
-</h2><p>You may want want to customize rendering of particles with custom shader that renders particles based on their data.
-To do that, expose the needed shader properties - they will appear in the output context. Then get the particle data with the <code>Get Attribute</code> block (location must be set to <em>current</em>) and connect to exposed property.</p>
+</h2><p>You may want to customize rendering of particles with custom shader that renders particles based on their data.
+To do that, expose the needed shader properties - they will appear in the output context. Then get the particle data with the <code>Get Attribute</code> operator node (location must be set to <em>current</em>), and connect to exposed property.</p>
 <figure><img src="pass-data-to-shader.png"
          alt="Particle color and size pased to the shader."/><figcaption>
             <p>Particle color and size pased to the shader.</p>
@@ -428,7 +428,7 @@ here
     <a class="heading-anchor" href="#how-to-scale-object-and-get-object-transform">
         <svg fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path clip-rule="evenodd" fill="#4A5568" fill-rule="evenodd" d="M12.5858 4.58579C13.3668 3.80474 14.6331 3.80474 15.4142 4.58579C16.1952 5.36683 16.1952 6.63316 15.4142 7.41421L12.4142 10.4142C11.6331 11.1953 10.3668 11.1953 9.58577 10.4142C9.19524 10.0237 8.56208 10.0237 8.17156 10.4142C7.78103 10.8047 7.78103 11.4379 8.17156 11.8284C9.73365 13.3905 12.2663 13.3905 13.8284 11.8284L16.8284 8.82843C18.3905 7.26633 18.3905 4.73367 16.8284 3.17157C15.2663 1.60948 12.7337 1.60948 11.1716 3.17157L9.67156 4.67157C9.28103 5.0621 9.28103 5.69526 9.67156 6.08579C10.0621 6.47631 10.6952 6.47631 11.0858 6.08579L12.5858 4.58579ZM7.58579 9.58579C8.36683 8.80474 9.63316 8.80474 10.4142 9.58579C10.8047 9.97631 11.4379 9.97631 11.8284 9.58579C12.219 9.19526 12.219 8.5621 11.8284 8.17157C10.2663 6.60948 7.73367 6.60948 6.17157 8.17157L3.17157 11.1716C1.60948 12.7337 1.60948 15.2663 3.17157 16.8284C4.73367 18.3905 7.26633 18.3905 8.82843 16.8284L10.3284 15.3284C10.719 14.9379 10.719 14.3047 10.3284 13.9142C9.9379 13.5237 9.30474 13.5237 8.91421 13.9142L7.41421 15.4142C6.63316 16.1953 5.36684 16.1953 4.58579 15.4142C3.80474 14.6332 3.80474 13.3668 4.58579 12.5858L7.58579 9.58579Z"/></svg>
     </a>
-</h2><p>When system simulation space is set to <code>World</code> particles ignore parent object scale. If you want particles to be still affected by object scale, you can scale them with LocalToWorld node.
+</h2><p>When system simulation space is set to <code>World</code> particles ignore parent object scale. If you want particles to be still affected by object scale, you can scale them with <code>LocalToWorld</code> node.
 This node returns matrix that can be used to transform positions, directions and vectors.</p>
 <figure><img src="local-to-world.png"
          alt="Particles simulated in world space, but initialized with object scale."/><figcaption>
@@ -499,6 +499,146 @@ For example if you want to spawn decal on the ground you can orient particles wi
 <figure><img src="decals.gif"/>
 </figure>
 <p>Currently URP VFX decals do not support layers.</p>
+<h2 id="how-to-bake-sdf-signed-distance-field">
+    How to bake SDF (Signed Distance Field)
+    <a class="heading-anchor" href="#how-to-bake-sdf-signed-distance-field">
+        <svg fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path clip-rule="evenodd" fill="#4A5568" fill-rule="evenodd" d="M12.5858 4.58579C13.3668 3.80474 14.6331 3.80474 15.4142 4.58579C16.1952 5.36683 16.1952 6.63316 15.4142 7.41421L12.4142 10.4142C11.6331 11.1953 10.3668 11.1953 9.58577 10.4142C9.19524 10.0237 8.56208 10.0237 8.17156 10.4142C7.78103 10.8047 7.78103 11.4379 8.17156 11.8284C9.73365 13.3905 12.2663 13.3905 13.8284 11.8284L16.8284 8.82843C18.3905 7.26633 18.3905 4.73367 16.8284 3.17157C15.2663 1.60948 12.7337 1.60948 11.1716 3.17157L9.67156 4.67157C9.28103 5.0621 9.28103 5.69526 9.67156 6.08579C10.0621 6.47631 10.6952 6.47631 11.0858 6.08579L12.5858 4.58579ZM7.58579 9.58579C8.36683 8.80474 9.63316 8.80474 10.4142 9.58579C10.8047 9.97631 11.4379 9.97631 11.8284 9.58579C12.219 9.19526 12.219 8.5621 11.8284 8.17157C10.2663 6.60948 7.73367 6.60948 6.17157 8.17157L3.17157 11.1716C1.60948 12.7337 1.60948 15.2663 3.17157 16.8284C4.73367 18.3905 7.26633 18.3905 8.82843 16.8284L10.3284 15.3284C10.719 14.9379 10.719 14.3047 10.3284 13.9142C9.9379 13.5237 9.30474 13.5237 8.91421 13.9142L7.41421 15.4142C6.63316 16.1953 5.36684 16.1953 4.58579 15.4142C3.80474 14.6332 3.80474 13.3668 4.58579 12.5858L7.58579 9.58579Z"/></svg>
+    </a>
+</h2><p>VFX Graph has integrated signed distance field bake tool that allows to generate SDF for meshes or prefabs (<code>Window &gt; Visual Effects &gt; Utilities &gt; SDF Bake Tool</code>). However, there is an API that allows you to create your own baking tool and update the SDF at runtime. There is example of baking SDF for skinned mesh in <a href="https://docs.unity3d.com/Packages/com.unity.visualeffectgraph@14.0/manual/sdf-bake-tool-api.html">the docs</a>.
+You can also bake multiple meshes into single SDF, however <code>MeshToSDFBaker</code> class uses <a href="https://docs.unity3d.com/2022.2/Documentation/ScriptReference/Mesh.CombineMeshes.html">CombineMeshes</a> to merge them, and it requires meshes to be <a href="https://docs.unity3d.com/ScriptReference/Mesh-isReadable.html">readable</a> when used in runtime.<br>
+Example script below finds all mesh renderers and bakes part of the scene into SDF.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System.Collections.Generic</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityEngine</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityEngine.VFX</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityEngine.VFX.SDF</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">UnityEngine.VFX.Utility</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="na">
+</span></span></span><span class="line"><span class="cl"><span class="na">[ExecuteAlways]</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">SDFSceneBaker</span> <span class="p">:</span> <span class="n">MonoBehaviour</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="n">LayerMask</span> <span class="n">collectLayers</span> <span class="p">=</span> <span class="p">-</span><span class="m">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="kt">bool</span> <span class="n">bakeOnAwake</span> <span class="p">=</span> <span class="k">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="na">    [Header(&#34;Box&#34;)]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="n">Vector3</span> <span class="n">center</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="n">Vector3</span> <span class="n">size</span> <span class="p">=</span> <span class="n">Vector3</span><span class="p">.</span><span class="n">one</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="kt">int</span> <span class="n">maxResolution</span> <span class="p">=</span> <span class="m">32</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="na">    [Header(&#34;SDF Baker&#34;)]</span>
+</span></span><span class="line"><span class="cl"><span class="na">    [Range(1, 16)]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="kt">int</span> <span class="n">signPassesCount</span> <span class="p">=</span> <span class="m">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="na">    [Range(0f, 1f)]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="kt">float</span> <span class="n">threshold</span> <span class="p">=</span> <span class="m">0.5f</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="na">    [Range(-1f, 1f)]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="kt">float</span> <span class="n">offset</span> <span class="p">=</span> <span class="m">0f</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="na">    [Header(&#34;Debug&#34;)]</span>
+</span></span><span class="line"><span class="cl"><span class="na">    [SerializeField]</span> <span class="k">private</span> <span class="n">VisualEffect</span> <span class="n">debugVFX</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="na">    [SerializeField]</span> <span class="k">private</span> <span class="n">ExposedProperty</span> <span class="n">sdfTextureProperty</span> <span class="p">=</span> <span class="s">&#34;sdf&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="na">    [SerializeField]</span> <span class="k">private</span> <span class="n">ExposedProperty</span> <span class="n">sdfPositionProperty</span> <span class="p">=</span> <span class="s">&#34;sdfPosition&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="na">    [SerializeField]</span> <span class="k">private</span> <span class="n">ExposedProperty</span> <span class="n">sdfScaleProperty</span> <span class="p">=</span> <span class="s">&#34;sdfScale&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">readonly</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">Mesh</span><span class="p">&gt;</span> <span class="n">meshes</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">Mesh</span><span class="p">&gt;();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">readonly</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">Matrix4x4</span><span class="p">&gt;</span> <span class="n">matrices</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">Matrix4x4</span><span class="p">&gt;();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="n">MeshToSDFBaker</span> <span class="n">sdfBaker</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="n">Vector3</span> <span class="n">CenterWS</span> <span class="p">=&gt;</span> <span class="n">transform</span><span class="p">.</span><span class="n">TransformPoint</span><span class="p">(</span><span class="n">center</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">void</span> <span class="n">OnValidate</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">size</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Vector3</span><span class="p">(</span><span class="n">Mathf</span><span class="p">.</span><span class="n">Max</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="n">size</span><span class="p">.</span><span class="n">x</span><span class="p">),</span> <span class="n">Mathf</span><span class="p">.</span><span class="n">Max</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="n">size</span><span class="p">.</span><span class="n">y</span><span class="p">),</span> <span class="n">Mathf</span><span class="p">.</span><span class="n">Max</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="n">size</span><span class="p">.</span><span class="n">z</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">void</span> <span class="n">Start</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">Application</span><span class="p">.</span><span class="n">isEditor</span> <span class="p">||</span> <span class="n">bakeOnAwake</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">BakeSDF</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">void</span> <span class="n">OnDestroy</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sdfBaker</span><span class="p">?.</span><span class="n">Dispose</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sdfBaker</span> <span class="p">=</span> <span class="k">null</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="na">
+</span></span></span><span class="line"><span class="cl"><span class="na">    [ContextMenu(&#34;Bake SDF&#34;)]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">void</span> <span class="n">BakeSDF</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">CollectMeshes</span><span class="p">(</span><span class="n">meshes</span><span class="p">,</span> <span class="n">matrices</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">sdfBaker</span> <span class="p">==</span> <span class="k">null</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">sdfBaker</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MeshToSDFBaker</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">CenterWS</span><span class="p">,</span> <span class="n">maxResolution</span><span class="p">,</span> <span class="n">meshes</span><span class="p">,</span> <span class="n">matrices</span><span class="p">,</span> <span class="n">signPassesCount</span><span class="p">,</span> <span class="n">threshold</span><span class="p">,</span> <span class="n">offset</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">sdfBaker</span><span class="p">.</span><span class="n">Reinit</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">CenterWS</span><span class="p">,</span> <span class="n">maxResolution</span><span class="p">,</span> <span class="n">meshes</span><span class="p">,</span> <span class="n">matrices</span><span class="p">,</span> <span class="n">signPassesCount</span><span class="p">,</span> <span class="n">threshold</span><span class="p">,</span> <span class="n">offset</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sdfBaker</span><span class="p">.</span><span class="n">BakeSDF</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">debugVFX</span> <span class="p">!=</span> <span class="k">null</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">debugVFX</span><span class="p">.</span><span class="n">SetTexture</span><span class="p">(</span><span class="n">sdfTextureProperty</span><span class="p">,</span> <span class="n">sdfBaker</span><span class="p">.</span><span class="n">SdfTexture</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">debugVFX</span><span class="p">.</span><span class="n">SetVector3</span><span class="p">(</span><span class="n">sdfScaleProperty</span><span class="p">,</span> <span class="n">sdfBaker</span><span class="p">.</span><span class="n">GetActualBoxSize</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">            <span class="n">debugVFX</span><span class="p">.</span><span class="n">SetVector3</span><span class="p">(</span><span class="n">sdfPositionProperty</span><span class="p">,</span> <span class="n">CenterWS</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">void</span> <span class="n">CollectMeshes</span><span class="p">(</span><span class="n">List</span><span class="p">&lt;</span><span class="n">Mesh</span><span class="p">&gt;</span> <span class="n">meshes</span><span class="p">,</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">Matrix4x4</span><span class="p">&gt;</span> <span class="n">matrices</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// Find all mesh renderers on scene</span>
+</span></span><span class="line"><span class="cl">        <span class="n">MeshRenderer</span><span class="p">[]</span> <span class="n">meshRenderers</span> <span class="p">=</span> <span class="n">FindObjectsOfType</span><span class="p">&lt;</span><span class="n">MeshRenderer</span><span class="p">&gt;();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// Prepare lists</span>
+</span></span><span class="line"><span class="cl">        <span class="n">meshes</span><span class="p">.</span><span class="n">Clear</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">matrices</span><span class="p">.</span><span class="n">Clear</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">meshes</span><span class="p">.</span><span class="n">Capacity</span> <span class="p">=</span> <span class="n">Mathf</span><span class="p">.</span><span class="n">Max</span><span class="p">(</span><span class="n">meshes</span><span class="p">.</span><span class="n">Capacity</span><span class="p">,</span> <span class="n">meshRenderers</span><span class="p">.</span><span class="n">Length</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">matrices</span><span class="p">.</span><span class="n">Capacity</span> <span class="p">=</span> <span class="n">Mathf</span><span class="p">.</span><span class="n">Max</span><span class="p">(</span><span class="n">matrices</span><span class="p">.</span><span class="n">Capacity</span><span class="p">,</span> <span class="n">meshRenderers</span><span class="p">.</span><span class="n">Length</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// Collect valid meshes matching the layer mask</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span> <span class="n">i</span> <span class="p">&lt;</span> <span class="n">meshRenderers</span><span class="p">.</span><span class="n">Length</span><span class="p">;</span> <span class="n">i</span><span class="p">++)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">MeshRenderer</span> <span class="n">meshRenderer</span> <span class="p">=</span> <span class="n">meshRenderers</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">collectLayers</span> <span class="p">==</span> <span class="p">(</span><span class="n">collectLayers</span> <span class="p">|</span> <span class="p">(</span><span class="m">1</span> <span class="p">&lt;&lt;</span> <span class="n">meshRenderer</span><span class="p">.</span><span class="n">gameObject</span><span class="p">.</span><span class="n">layer</span><span class="p">))</span> <span class="p">&amp;&amp;</span> <span class="n">meshRenderer</span><span class="p">.</span><span class="n">TryGetComponent</span><span class="p">(</span><span class="k">out</span> <span class="n">MeshFilter</span> <span class="n">meshFilter</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">            <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">meshes</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">meshFilter</span><span class="p">.</span><span class="n">sharedMesh</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="n">matrices</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">meshRenderers</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">localToWorldMatrix</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">void</span> <span class="n">OnDrawGizmosSelected</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// Baking box gizmo</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Gizmos</span><span class="p">.</span><span class="n">color</span> <span class="p">=</span> <span class="n">Color</span><span class="p">.</span><span class="n">yellow</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Gizmos</span><span class="p">.</span><span class="n">DrawWireCube</span><span class="p">(</span><span class="n">CenterWS</span><span class="p">,</span> <span class="n">size</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cp">#if UNITY_EDITOR</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// Inspector bake button</span>
+</span></span><span class="line"><span class="cl"><span class="na">[UnityEditor.CustomEditor(typeof(SDFSceneBaker))]</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">SDFSceneBakerEditor</span> <span class="p">:</span> <span class="n">UnityEditor</span><span class="p">.</span><span class="n">Editor</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">override</span> <span class="k">void</span> <span class="n">OnInspectorGUI</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">DrawDefaultInspector</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">UnityEditor</span><span class="p">.</span><span class="n">EditorGUILayout</span><span class="p">.</span><span class="n">Space</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">GUILayout</span><span class="p">.</span><span class="n">Button</span><span class="p">(</span><span class="s">&#34;Bake SDF&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="p">(</span><span class="n">target</span> <span class="k">as</span> <span class="n">SDFSceneBaker</span><span class="p">).</span><span class="n">BakeSDF</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">#</span><span class="n">endif</span>
+</span></span></code></pre></div><figure><img src="collide-sdf.png"
+         alt="Debug graph has simple particle system with SDF collision block."/><figcaption>
+            <p>Debug graph has simple particle system with SDF collision block.</p>
+        </figcaption>
+</figure>
+<figure><img src="sdf-scene.gif"/>
+</figure>
+<blockquote>
+<p><em>Additional resources: <a href="https://forum.unity.com/threads/sdf-collision-is-leaking-particles.1240378/">sdf-collision-is-leaking-particles</a>, <a href="https://github.com/Unity-Technologies/com.unity.demoteam.mesh-to-sdf">SDF Package</a></em></p>
+</blockquote>
 <h2 id="how-to-kill-particle-via-blackboard-event">
     How to kill particle via blackboard “event”
     <a class="heading-anchor" href="#how-to-kill-particle-via-blackboard-event">

@@ -22,8 +22,8 @@ You can access all available properties of context and operator/block nodes by s
 {{% figure src="inspector.png" %}}
 
 ## How to pass particle data to shader
-You may want want to customize rendering of particles with custom shader that renders particles based on their data. 
-To do that, expose the needed shader properties - they will appear in the output context. Then get the particle data with the `Get Attribute` block (location must be set to *current*) and connect to exposed property.
+You may want to customize rendering of particles with custom shader that renders particles based on their data. 
+To do that, expose the needed shader properties - they will appear in the output context. Then get the particle data with the `Get Attribute` operator node (location must be set to *current*), and connect to exposed property.
 {{% figure src="pass-data-to-shader.png" caption="Particle color and size pased to the shader." %}}
 
 ## How to use custom attributes
@@ -220,7 +220,7 @@ float3 VFXSafeNormalizedCross(float3 v1, float3 v2, float3 fallback)
 > *Additional resources: [particles-orient-to-camera](https://forum.unity.com/threads/particles-orient-to-camera-even-though-orient-along-velocity-block-is-used.1427079/#post-8959371), [rotate-particles-towards-direction](https://forum.unity.com/threads/rotate-particles-towards-direction-from-shape.1352003/#post-8535587)*
 
 ## How to scale object and get object transform
-When system simulation space is set to `World` particles ignore parent object scale. If you want particles to be still affected by object scale, you can scale them with LocalToWorld node.
+When system simulation space is set to `World` particles ignore parent object scale. If you want particles to be still affected by object scale, you can scale them with `LocalToWorld` node.
 This node returns matrix that can be used to transform positions, directions and vectors.
 
 {{% figure src="local-to-world.png" caption="Particles simulated in world space, but initialized with object scale." %}}
@@ -259,6 +259,144 @@ For example if you want to spawn decal on the ground you can orient particles wi
 {{% figure src="decals.gif" %}}
 
 Currently URP VFX decals do not support layers.
+
+## How to bake SDF (Signed Distance Field)
+VFX Graph has integrated signed distance field bake tool that allows to generate SDF for meshes or prefabs (`Window > Visual Effects > Utilities > SDF Bake Tool`). However, there is an API that allows you to create your own baking tool and update the SDF at runtime. There is example of baking SDF for skinned mesh in [the docs](https://docs.unity3d.com/Packages/com.unity.visualeffectgraph@14.0/manual/sdf-bake-tool-api.html).
+You can also bake multiple meshes into single SDF, however `MeshToSDFBaker` class uses [CombineMeshes](https://docs.unity3d.com/2022.2/Documentation/ScriptReference/Mesh.CombineMeshes.html) to merge them, and it requires meshes to be [readable](https://docs.unity3d.com/ScriptReference/Mesh-isReadable.html) when used in runtime.\
+Example script below finds all mesh renderers and bakes part of the scene into SDF.
+
+```csharp
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.VFX;
+using UnityEngine.VFX.SDF;
+using UnityEngine.VFX.Utility;
+
+[ExecuteAlways]
+public class SDFSceneBaker : MonoBehaviour
+{
+    public LayerMask collectLayers = -1;
+    public bool bakeOnAwake = false;
+    [Header("Box")]
+    public Vector3 center;
+    public Vector3 size = Vector3.one;
+    public int maxResolution = 32;
+    [Header("SDF Baker")]
+    [Range(1, 16)]
+    public int signPassesCount = 1;
+    [Range(0f, 1f)]
+    public float threshold = 0.5f;
+    [Range(-1f, 1f)]
+    public float offset = 0f;
+    [Header("Debug")]
+    [SerializeField] private VisualEffect debugVFX;
+    [SerializeField] private ExposedProperty sdfTextureProperty = "sdf";
+    [SerializeField] private ExposedProperty sdfPositionProperty = "sdfPosition";
+    [SerializeField] private ExposedProperty sdfScaleProperty = "sdfScale";
+
+    private readonly List<Mesh> meshes = new List<Mesh>();
+    private readonly List<Matrix4x4> matrices = new List<Matrix4x4>();
+    private MeshToSDFBaker sdfBaker;
+    public Vector3 CenterWS => transform.TransformPoint(center);
+
+    private void OnValidate()
+    {
+        size = new Vector3(Mathf.Max(0, size.x), Mathf.Max(0, size.y), Mathf.Max(0, size.z));
+    }
+
+    private void Start()
+    {
+        if (Application.isEditor || bakeOnAwake)
+        {
+            BakeSDF();
+        }
+    }
+
+    private void OnDestroy()
+    {
+        sdfBaker?.Dispose();
+        sdfBaker = null;
+    }
+
+    [ContextMenu("Bake SDF")]
+    public void BakeSDF()
+    {
+        CollectMeshes(meshes, matrices);
+        
+        if (sdfBaker == null)
+        {
+            sdfBaker = new MeshToSDFBaker(size, CenterWS, maxResolution, meshes, matrices, signPassesCount, threshold, offset);
+        }
+        else
+        {
+            sdfBaker.Reinit(size, CenterWS, maxResolution, meshes, matrices, signPassesCount, threshold, offset);
+        }
+        sdfBaker.BakeSDF();
+
+        if (debugVFX != null)
+        {
+            debugVFX.SetTexture(sdfTextureProperty, sdfBaker.SdfTexture);
+            debugVFX.SetVector3(sdfScaleProperty, sdfBaker.GetActualBoxSize());
+            debugVFX.SetVector3(sdfPositionProperty, CenterWS);
+        }
+    }
+
+    private void CollectMeshes(List<Mesh> meshes, List<Matrix4x4> matrices)
+    {
+        // Find all mesh renderers on scene
+        MeshRenderer[] meshRenderers = FindObjectsOfType<MeshRenderer>();
+
+        // Prepare lists
+        meshes.Clear();
+        matrices.Clear();
+        meshes.Capacity = Mathf.Max(meshes.Capacity, meshRenderers.Length);
+        matrices.Capacity = Mathf.Max(matrices.Capacity, meshRenderers.Length);
+
+        // Collect valid meshes matching the layer mask
+        for (int i = 0; i < meshRenderers.Length; i++)
+        {
+            MeshRenderer meshRenderer = meshRenderers[i];
+            if (collectLayers == (collectLayers | (1 << meshRenderer.gameObject.layer)) && meshRenderer.TryGetComponent(out MeshFilter meshFilter))
+            {
+                meshes.Add(meshFilter.sharedMesh);
+                matrices.Add(meshRenderers[i].localToWorldMatrix);
+            }
+        }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        // Baking box gizmo
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireCube(CenterWS, size);
+    }
+}
+
+#if UNITY_EDITOR
+// Inspector bake button
+[UnityEditor.CustomEditor(typeof(SDFSceneBaker))]
+public class SDFSceneBakerEditor : UnityEditor.Editor
+{
+    public override void OnInspectorGUI()
+    {
+        DrawDefaultInspector();
+        UnityEditor.EditorGUILayout.Space();
+        if (GUILayout.Button("Bake SDF"))
+        {
+            (target as SDFSceneBaker).BakeSDF();
+        }
+    }
+}
+#endif
+
+
+```
+
+{{% figure src="collide-sdf.png" caption="Debug graph has simple particle system with SDF collision block." %}}
+
+{{% figure src="sdf-scene.gif" %}}
+
+> *Additional resources: [sdf-collision-is-leaking-particles](https://forum.unity.com/threads/sdf-collision-is-leaking-particles.1240378/), [SDF Package](https://github.com/Unity-Technologies/com.unity.demoteam.mesh-to-sdf)*
 
 ## How to kill particle via blackboard “event”
 // TODO
