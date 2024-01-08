@@ -53,7 +53,7 @@
         },
         "datePublished": "2023-04-19",
         "description": "Unity VFX Graph cheatsheet.",
-        "wordCount":  2263 ,
+        "wordCount":  2265 ,
         "mainEntityOfPage": "True",
         "dateModified": "2023-04-19",
         "image": {
@@ -373,7 +373,7 @@ Following example script takes the list of points and sends them through graphic
 Inside the graph you need to select matching type of data used by the buffer. You can do it by clicking the small cog icon in the right top corner of the <code>SampleBuffer</code> node.</p>
 <figure><img src="buffer-type.png"/>
 </figure>
-<p>Following graph samples the buffer using <code>particle id</code> and spawns particles between points provided by buffer. Because we do not shrink the buffer length, we must wrap index by number of current elements <em>(index % count)</em> in case we removed any spawn point.</p>
+<p>Following graph samples the buffer using <code>spawnIndex</code> and spawns particles between points provided by buffer. Because we do not shrink the buffer length, we must wrap index by number of current elements <em>(index % count)</em> in case we removed any spawn point.</p>
 <figure><img src="gbuffer.png"/>
 </figure>
 <p>If you want to use custom struct as buffer elements you can mark it with attribute <code>[VFXType(VFXTypeAttribute.Usage.GraphicsBuffer)]</code> and get stride size with <code>System.Runtime.InteropServices.Marshal.SizeOf(typeof(YourStruct));</code> - more information <a href="https://forum.unity.com/threads/unable-to-sample-custom-struct-in-visual-effects-graph.1198300/#post-7661626">here</a>.</p>
@@ -489,6 +489,9 @@ This node returns matrix that can be used to transform positions, directions and
     </a>
 </h2><p>You can read great post about mesh sampling here:
 <a href="https://forum.unity.com/threads/uniform-distribution-with-skinned-mesh-sampling.1188571">https://forum.unity.com/threads/uniform-distribution-with-skinned-mesh-sampling.1188571</a></p>
+<blockquote>
+<p><em>Additional resources: <a href="https://forum.unity.com/threads/emit-particles-from-animated-rig-model-with-color-sampled-from-the-texture.1490452/#post-9286618">emit-particles-from-animated-rig-model</a></em></p>
+</blockquote>
 <h2 id="how-to-use-particle-decals">
     How to use particle decals
     <a class="heading-anchor" href="#how-to-use-particle-decals">
@@ -686,7 +689,7 @@ Example script below finds all mesh renderers and bakes part of the scene into S
 </svg>
 </a></div>
     <small class="footer_copyright">
-        © 2023 Qriva.
+        © 2024 Qriva.
         Powered by <a href="https://github.com/hugo-sid/hugo-blog-awesome" target="_blank" rel="noreferrer noopener">Hugo blog awesome</a>
         theme on
         <a href="https://gohugo.io" target="_blank" rel="noreferrer noopener">Hugo</a>.

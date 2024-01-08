@@ -179,7 +179,7 @@ Inside the graph you need to select matching type of data used by the buffer. Yo
 
 {{% figure src="buffer-type.png" %}}
 
-Following graph samples the buffer using `particle id` and spawns particles between points provided by buffer. Because we do not shrink the buffer length, we must wrap index by number of current elements *(index % count)* in case we removed any spawn point.
+Following graph samples the buffer using `spawnIndex` and spawns particles between points provided by buffer. Because we do not shrink the buffer length, we must wrap index by number of current elements *(index % count)* in case we removed any spawn point.
 
 {{% figure src="gbuffer.png" %}}
 
@@ -251,6 +251,7 @@ By default the `oldPosition` attribute is not set, the only exception is `SpawnO
 ## Mesh sampling and point cache
 You can read great post about mesh sampling here:
 https://forum.unity.com/threads/uniform-distribution-with-skinned-mesh-sampling.1188571
+> *Additional resources: [emit-particles-from-animated-rig-model](https://forum.unity.com/threads/emit-particles-from-animated-rig-model-with-color-sampled-from-the-texture.1490452/#post-9286618)*
 
 ## How to use particle decals
 Output Particle Decal context is used to spawn decal particles. Important detail is that particle size and particle scale defines the decal box used to cast decals.
